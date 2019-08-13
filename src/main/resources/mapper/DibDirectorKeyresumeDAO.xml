@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbd.csrc.dataparse.dao.DibDirectorKeyresumeDAO">
+    <resultMap id="BaseResultMap" type="com.bbd.csrc.dataparse.domain.DibDirectorKeyresume">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="cninfo_id" jdbcType="VARCHAR" property="cninfoId"/>
+        <result column="cninfo_year" jdbcType="VARCHAR" property="cninfoYear"/>
+        <result column="management_id" jdbcType="VARCHAR" property="managementId"/>
+        <result column="sec_code" jdbcType="VARCHAR" property="secCode"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="position" jdbcType="VARCHAR" property="position"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="birthyear" jdbcType="VARCHAR" property="birthyear"/>
+        <result column="nationality" jdbcType="VARCHAR" property="nationality"/>
+        <result column="nativeplace" jdbcType="VARCHAR" property="nativeplace"/>
+        <result column="education" jdbcType="VARCHAR" property="education"/>
+        <result column="university" jdbcType="VARCHAR" property="university"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="report_date" jdbcType="DATE" property="reportDate"/>
+        <result column="update_state" jdbcType="VARCHAR" property="updateState"/>
+        <result column="finish_by" jdbcType="VARCHAR" property="finishBy"/>
+        <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime"/>
+        <result column="report_source" jdbcType="VARCHAR" property="reportSource"/>
+        <result column="add_by" jdbcType="VARCHAR" property="addBy"/>
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="finish_state" jdbcType="VARCHAR" property="finishState"/>
+        <result column="audit_by" jdbcType="VARCHAR" property="auditBy"/>
+        <result column="retrial_by" jdbcType="VARCHAR" property="retrialBy"/>
+        <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime"/>
+        <result column="retrial_time" jdbcType="TIMESTAMP" property="retrialTime"/>
+        <result column="audit_state" jdbcType="VARCHAR" property="auditState"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="report_date_type" jdbcType="CHAR" property="reportDateType"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="com.bbd.csrc.dataparse.domain.DibDirectorKeyresume">
+        <result column="resume" jdbcType="LONGVARCHAR" property="resume"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, cninfo_id, cninfo_year, management_id, sec_code, `name`, `position`, sex, birthyear, 
+    nationality, nativeplace, education, university, title, report_date, update_state, 
+    finish_by, finish_time, report_source, add_by, add_time, update_by, update_time, 
+    finish_state, audit_by, retrial_by, audit_time, retrial_time, audit_state, remark, 
+    report_date_type
+  </sql>
+    <sql id="Blob_Column_List">
+    resume
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dib_director_keyresume
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultType="com.bbd.csrc.dataparse.domain.DibDirectorKeyresume">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+    </select>
+    <select id="selectSecCodeGroupBySecCode" resultType="string">
+      select sec_code from dib_director_keyresume
+      where report_date = #{reportDate}
+      GROUP BY sec_code
+    </select>
+    <select id="selectBySecCode" resultType="com.bbd.csrc.dataparse.domain.DibDirectorKeyresume">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dib_director_keyresume
+        <where>
+            <if test="reportDate != null">
+                and report_date = #{reportDate}
+            </if>
+            <if test="secCode != null">
+                and sec_code = #{secCode}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dib_director_keyresume
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.DibDirectorKeyresume" useGeneratedKeys="true">
+    insert into dib_director_keyresume (cninfo_id, cninfo_year, management_id, 
+      sec_code, `name`, `position`, 
+      sex, birthyear, nationality, 
+      nativeplace, education, university, 
+      title, report_date, update_state, 
+      finish_by, finish_time, report_source, 
+      add_by, add_time, update_by, 
+      update_time, finish_state, audit_by, 
+      retrial_by, audit_time, retrial_time, 
+      audit_state, remark, report_date_type, 
+      resume)
+    values (#{cninfoId,jdbcType=VARCHAR}, #{cninfoYear,jdbcType=VARCHAR}, #{managementId,jdbcType=VARCHAR}, 
+      #{secCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{birthyear,jdbcType=VARCHAR}, #{nationality,jdbcType=VARCHAR}, 
+      #{nativeplace,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{university,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{reportDate,jdbcType=DATE}, #{updateState,jdbcType=VARCHAR}, 
+      #{finishBy,jdbcType=VARCHAR}, #{finishTime,jdbcType=TIMESTAMP}, #{reportSource,jdbcType=VARCHAR}, 
+      #{addBy,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{finishState,jdbcType=VARCHAR}, #{auditBy,jdbcType=VARCHAR}, 
+      #{retrialBy,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, #{retrialTime,jdbcType=TIMESTAMP}, 
+      #{auditState,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{reportDateType,jdbcType=CHAR}, 
+      #{resume,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.DibDirectorKeyresume" useGeneratedKeys="true">
+        insert into dib_director_keyresume
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cninfoId != null">
+                cninfo_id,
+            </if>
+            <if test="cninfoYear != null">
+                cninfo_year,
+            </if>
+            <if test="managementId != null">
+                management_id,
+            </if>
+            <if test="secCode != null">
+                sec_code,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="position != null">
+                `position`,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="birthyear != null">
+                birthyear,
+            </if>
+            <if test="nationality != null">
+                nationality,
+            </if>
+            <if test="nativeplace != null">
+                nativeplace,
+            </if>
+            <if test="education != null">
+                education,
+            </if>
+            <if test="university != null">
+                university,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="reportDate != null">
+                report_date,
+            </if>
+            <if test="updateState != null">
+                update_state,
+            </if>
+            <if test="finishBy != null">
+                finish_by,
+            </if>
+            <if test="finishTime != null">
+                finish_time,
+            </if>
+            <if test="reportSource != null">
+                report_source,
+            </if>
+            <if test="addBy != null">
+                add_by,
+            </if>
+            <if test="addTime != null">
+                add_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="finishState != null">
+                finish_state,
+            </if>
+            <if test="auditBy != null">
+                audit_by,
+            </if>
+            <if test="retrialBy != null">
+                retrial_by,
+            </if>
+            <if test="auditTime != null">
+                audit_time,
+            </if>
+            <if test="retrialTime != null">
+                retrial_time,
+            </if>
+            <if test="auditState != null">
+                audit_state,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="reportDateType != null">
+                report_date_type,
+            </if>
+            <if test="resume != null">
+                resume,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cninfoId != null">
+                #{cninfoId,jdbcType=VARCHAR},
+            </if>
+            <if test="cninfoYear != null">
+                #{cninfoYear,jdbcType=VARCHAR},
+            </if>
+            <if test="managementId != null">
+                #{managementId,jdbcType=VARCHAR},
+            </if>
+            <if test="secCode != null">
+                #{secCode,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthyear != null">
+                #{birthyear,jdbcType=VARCHAR},
+            </if>
+            <if test="nationality != null">
+                #{nationality,jdbcType=VARCHAR},
+            </if>
+            <if test="nativeplace != null">
+                #{nativeplace,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="university != null">
+                #{university,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="reportDate != null">
+                #{reportDate,jdbcType=DATE},
+            </if>
+            <if test="updateState != null">
+                #{updateState,jdbcType=VARCHAR},
+            </if>
+            <if test="finishBy != null">
+                #{finishBy,jdbcType=VARCHAR},
+            </if>
+            <if test="finishTime != null">
+                #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reportSource != null">
+                #{reportSource,jdbcType=VARCHAR},
+            </if>
+            <if test="addBy != null">
+                #{addBy,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishState != null">
+                #{finishState,jdbcType=VARCHAR},
+            </if>
+            <if test="auditBy != null">
+                #{auditBy,jdbcType=VARCHAR},
+            </if>
+            <if test="retrialBy != null">
+                #{retrialBy,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null">
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="retrialTime != null">
+                #{retrialTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditState != null">
+                #{auditState,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="reportDateType != null">
+                #{reportDateType,jdbcType=CHAR},
+            </if>
+            <if test="resume != null">
+                #{resume,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bbd.csrc.dataparse.domain.DibDirectorKeyresume">
+        update dib_director_keyresume
+        <set>
+            <if test="cninfoId != null">
+                cninfo_id = #{cninfoId,jdbcType=VARCHAR},
+            </if>
+            <if test="cninfoYear != null">
+                cninfo_year = #{cninfoYear,jdbcType=VARCHAR},
+            </if>
+            <if test="managementId != null">
+                management_id = #{managementId,jdbcType=VARCHAR},
+            </if>
+            <if test="secCode != null">
+                sec_code = #{secCode,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                `position` = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthyear != null">
+                birthyear = #{birthyear,jdbcType=VARCHAR},
+            </if>
+            <if test="nationality != null">
+                nationality = #{nationality,jdbcType=VARCHAR},
+            </if>
+            <if test="nativeplace != null">
+                nativeplace = #{nativeplace,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                education = #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="university != null">
+                university = #{university,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="reportDate != null">
+                report_date = #{reportDate,jdbcType=DATE},
+            </if>
+            <if test="updateState != null">
+                update_state = #{updateState,jdbcType=VARCHAR},
+            </if>
+            <if test="finishBy != null">
+                finish_by = #{finishBy,jdbcType=VARCHAR},
+            </if>
+            <if test="finishTime != null">
+                finish_time = #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reportSource != null">
+                report_source = #{reportSource,jdbcType=VARCHAR},
+            </if>
+            <if test="addBy != null">
+                add_by = #{addBy,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishState != null">
+                finish_state = #{finishState,jdbcType=VARCHAR},
+            </if>
+            <if test="auditBy != null">
+                audit_by = #{auditBy,jdbcType=VARCHAR},
+            </if>
+            <if test="retrialBy != null">
+                retrial_by = #{retrialBy,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null">
+                audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="retrialTime != null">
+                retrial_time = #{retrialTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditState != null">
+                audit_state = #{auditState,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="reportDateType != null">
+                report_date_type = #{reportDateType,jdbcType=CHAR},
+            </if>
+            <if test="resume != null">
+                resume = #{resume,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bbd.csrc.dataparse.domain.DibDirectorKeyresume">
+    update dib_director_keyresume
+    set cninfo_id = #{cninfoId,jdbcType=VARCHAR},
+      cninfo_year = #{cninfoYear,jdbcType=VARCHAR},
+      management_id = #{managementId,jdbcType=VARCHAR},
+      sec_code = #{secCode,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      `position` = #{position,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthyear = #{birthyear,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      university = #{university,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      report_date = #{reportDate,jdbcType=DATE},
+      update_state = #{updateState,jdbcType=VARCHAR},
+      finish_by = #{finishBy,jdbcType=VARCHAR},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      report_source = #{reportSource,jdbcType=VARCHAR},
+      add_by = #{addBy,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      finish_state = #{finishState,jdbcType=VARCHAR},
+      audit_by = #{auditBy,jdbcType=VARCHAR},
+      retrial_by = #{retrialBy,jdbcType=VARCHAR},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      retrial_time = #{retrialTime,jdbcType=TIMESTAMP},
+      audit_state = #{auditState,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      report_date_type = #{reportDateType,jdbcType=CHAR},
+      resume = #{resume,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.bbd.csrc.dataparse.domain.DibDirectorKeyresume">
+    update dib_director_keyresume
+    set cninfo_id = #{cninfoId,jdbcType=VARCHAR},
+      cninfo_year = #{cninfoYear,jdbcType=VARCHAR},
+      management_id = #{managementId,jdbcType=VARCHAR},
+      sec_code = #{secCode,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      `position` = #{position,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthyear = #{birthyear,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      university = #{university,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      report_date = #{reportDate,jdbcType=DATE},
+      update_state = #{updateState,jdbcType=VARCHAR},
+      finish_by = #{finishBy,jdbcType=VARCHAR},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      report_source = #{reportSource,jdbcType=VARCHAR},
+      add_by = #{addBy,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      finish_state = #{finishState,jdbcType=VARCHAR},
+      audit_by = #{auditBy,jdbcType=VARCHAR},
+      retrial_by = #{retrialBy,jdbcType=VARCHAR},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      retrial_time = #{retrialTime,jdbcType=TIMESTAMP},
+      audit_state = #{auditState,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      report_date_type = #{reportDateType,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

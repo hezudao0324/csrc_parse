@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbd.csrc.dataparse.dao.CompanyBasicInfoDAO">
+    <resultMap id="BaseResultMap" type="com.bbd.csrc.dataparse.domain.CompanyBasicInfo">
+        <id column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="bbd_qyxx_id" jdbcType="VARCHAR" property="bbdQyxxId"/>
+        <result column="legal_representative" jdbcType="VARCHAR" property="legalRepresentative"/>
+        <result column="register_address" jdbcType="VARCHAR" property="registerAddress"/>
+        <result column="tel" jdbcType="VARCHAR" property="tel"/>
+        <result column="register_date" jdbcType="DATE" property="registerDate"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="register_amount" jdbcType="DOUBLE" property="registerAmount"/>
+        <result column="ipo_type" jdbcType="VARCHAR" property="ipoType"/>
+        <result column="market_value" jdbcType="DOUBLE" property="marketValue"/>
+        <result column="year_assert" jdbcType="DOUBLE" property="yearAssert"/>
+        <result column="year_profit" jdbcType="DOUBLE" property="yearProfit"/>
+        <result column="stock_code" jdbcType="VARCHAR" property="stockCode"/>
+        <result column="ipo_date" jdbcType="DATE" property="ipoDate"/>
+        <result column="security_name" jdbcType="VARCHAR" property="securityName"/>
+        <result column="employee_amount" jdbcType="INTEGER" property="employeeAmount"/>
+        <result column="first_industry_code" jdbcType="VARCHAR" property="firstIndustryCode"/>
+        <result column="second_industry_code" jdbcType="VARCHAR" property="secondIndustryCode"/>
+        <result column="part_time" jdbcType="BIT" property="partTime"/>
+        <result column="independent_board_amount" jdbcType="INTEGER" property="independentBoardAmount"/>
+        <result column="independent_board_ratio" jdbcType="DOUBLE" property="independentBoardRatio"/>
+        <result column="share_holding_ratio" jdbcType="DOUBLE" property="shareHoldingRatio"/>
+        <result column="accounting_firm_change" jdbcType="BIT" property="accountingFirmChange"/>
+        <result column="related_person_subject_to_enforcement" jdbcType="INTEGER"
+                property="relatedPersonSubjectToEnforcement"/>
+        <result column="related_break_faith_person_subject_to_enforcement" jdbcType="INTEGER"
+                property="relatedBreakFaithPersonSubjectToEnforcement"/>
+        <result column="related_administrative_penalty_of_csrc" jdbcType="INTEGER"
+                property="relatedAdministrativePenaltyOfCsrc"/>
+        <result column="related_administrative_penalty_of_other_gov" jdbcType="INTEGER"
+                property="relatedAdministrativePenaltyOfOtherGov"/>
+        <result column="related_letter_of_exchange" jdbcType="INTEGER" property="relatedLetterOfExchange"/>
+        <result column="related_sub_letter_of_exchange" jdbcType="INTEGER" property="relatedSubLetterOfExchange"/>
+        <result column="related_judicative_paper" jdbcType="INTEGER" property="relatedJudicativePaper"/>
+        <result column="patent_amount" jdbcType="INTEGER" property="patentAmount"/>
+        <result column="trademark_amount" jdbcType="INTEGER" property="trademarkAmount"/>
+        <result column="software_copyright_amount" jdbcType="INTEGER" property="softwareCopyrightAmount"/>
+        <result column="embranchment_amount" jdbcType="INTEGER" property="embranchmentAmount"/>
+        <result column="exist_year" jdbcType="DOUBLE" property="existYear"/>
+        <result column="csrc_punishment" jdbcType="BIT" property="csrcPunishment"/>
+        <result column="sub_letter_of_exchange" jdbcType="INTEGER" property="subLetterOfExchange"/>
+        <result column="letter_of_exchange" jdbcType="INTEGER" property="letterOfExchange"/>
+        <result column="person_subject_to_enforcement" jdbcType="INTEGER" property="personSubjectToEnforcement"/>
+        <result column="lose_a_lawsuit" jdbcType="INTEGER" property="loseALawsuit"/>
+        <result column="s_holder_controller" jdbcType="VARCHAR" property="sHolderController"/>
+        <result column="agency_exaccountant" jdbcType="VARCHAR" property="agencyExaccountant"/>
+        <result column="s_info_exchmarket" jdbcType="VARCHAR" property="sInfoExchmarket"/>
+        <result column="first_holder_name" jdbcType="VARCHAR" property="firstHolderName"/>
+        <result column="first_holder_pct" jdbcType="DOUBLE" property="firstHolderPct"/>
+        <result column="s_info_administrativedivision1" jdbcType="VARCHAR" property="sInfoAdministrativedivision1"/>
+        <result column="s_info_administrativedivision2" jdbcType="VARCHAR" property="sInfoAdministrativedivision2"/>
+        <result column="s_info_administrativedivision3" jdbcType="VARCHAR" property="sInfoAdministrativedivision3"/>
+        <result column="company_name_fulltext" jdbcType="VARCHAR" property="companyNameFulltext"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    company_name, bbd_qyxx_id, legal_representative, register_address, tel, register_date, 
+    province, city, register_amount, ipo_type, market_value, year_assert, year_profit, 
+    stock_code, ipo_date, security_name, employee_amount, first_industry_code, second_industry_code, 
+    part_time, independent_board_amount, independent_board_ratio, share_holding_ratio, 
+    accounting_firm_change, related_person_subject_to_enforcement, related_break_faith_person_subject_to_enforcement, 
+    related_administrative_penalty_of_csrc, related_administrative_penalty_of_other_gov, 
+    related_letter_of_exchange, related_sub_letter_of_exchange, related_judicative_paper, 
+    patent_amount, trademark_amount, software_copyright_amount, embranchment_amount, 
+    exist_year, csrc_punishment, sub_letter_of_exchange, letter_of_exchange, person_subject_to_enforcement, 
+    lose_a_lawsuit, s_holder_controller, agency_exaccountant, s_info_exchmarket, first_holder_name, 
+    first_holder_pct, s_info_administrativedivision1, s_info_administrativedivision2, 
+    s_info_administrativedivision3, company_name_fulltext
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from company_basic_info
+        where company_name = #{companyName,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from company_basic_info
+    where company_name = #{companyName,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.bbd.csrc.dataparse.domain.CompanyBasicInfo">
+    insert into company_basic_info (company_name, bbd_qyxx_id, legal_representative, 
+      register_address, tel, register_date, 
+      province, city, register_amount, 
+      ipo_type, market_value, year_assert, 
+      year_profit, stock_code, ipo_date, 
+      security_name, employee_amount, first_industry_code, 
+      second_industry_code, part_time, independent_board_amount, 
+      independent_board_ratio, share_holding_ratio, 
+      accounting_firm_change, related_person_subject_to_enforcement, 
+      related_break_faith_person_subject_to_enforcement, related_administrative_penalty_of_csrc, 
+      related_administrative_penalty_of_other_gov, related_letter_of_exchange, 
+      related_sub_letter_of_exchange, related_judicative_paper, 
+      patent_amount, trademark_amount, software_copyright_amount, 
+      embranchment_amount, exist_year, csrc_punishment, 
+      sub_letter_of_exchange, letter_of_exchange, 
+      person_subject_to_enforcement, lose_a_lawsuit, 
+      s_holder_controller, agency_exaccountant, 
+      s_info_exchmarket, first_holder_name, first_holder_pct, 
+      s_info_administrativedivision1, s_info_administrativedivision2, 
+      s_info_administrativedivision3, company_name_fulltext
+      )
+    values (#{companyName,jdbcType=VARCHAR}, #{bbdQyxxId,jdbcType=VARCHAR}, #{legalRepresentative,jdbcType=VARCHAR}, 
+      #{registerAddress,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{registerDate,jdbcType=DATE}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{registerAmount,jdbcType=DOUBLE}, 
+      #{ipoType,jdbcType=VARCHAR}, #{marketValue,jdbcType=DOUBLE}, #{yearAssert,jdbcType=DOUBLE}, 
+      #{yearProfit,jdbcType=DOUBLE}, #{stockCode,jdbcType=VARCHAR}, #{ipoDate,jdbcType=DATE}, 
+      #{securityName,jdbcType=VARCHAR}, #{employeeAmount,jdbcType=INTEGER}, #{firstIndustryCode,jdbcType=VARCHAR}, 
+      #{secondIndustryCode,jdbcType=VARCHAR}, #{partTime,jdbcType=BIT}, #{independentBoardAmount,jdbcType=INTEGER}, 
+      #{independentBoardRatio,jdbcType=DOUBLE}, #{shareHoldingRatio,jdbcType=DOUBLE}, 
+      #{accountingFirmChange,jdbcType=BIT}, #{relatedPersonSubjectToEnforcement,jdbcType=INTEGER}, 
+      #{relatedBreakFaithPersonSubjectToEnforcement,jdbcType=INTEGER}, #{relatedAdministrativePenaltyOfCsrc,jdbcType=INTEGER}, 
+      #{relatedAdministrativePenaltyOfOtherGov,jdbcType=INTEGER}, #{relatedLetterOfExchange,jdbcType=INTEGER}, 
+      #{relatedSubLetterOfExchange,jdbcType=INTEGER}, #{relatedJudicativePaper,jdbcType=INTEGER}, 
+      #{patentAmount,jdbcType=INTEGER}, #{trademarkAmount,jdbcType=INTEGER}, #{softwareCopyrightAmount,jdbcType=INTEGER}, 
+      #{embranchmentAmount,jdbcType=INTEGER}, #{existYear,jdbcType=DOUBLE}, #{csrcPunishment,jdbcType=BIT}, 
+      #{subLetterOfExchange,jdbcType=INTEGER}, #{letterOfExchange,jdbcType=INTEGER}, 
+      #{personSubjectToEnforcement,jdbcType=INTEGER}, #{loseALawsuit,jdbcType=INTEGER}, 
+      #{sHolderController,jdbcType=VARCHAR}, #{agencyExaccountant,jdbcType=VARCHAR}, 
+      #{sInfoExchmarket,jdbcType=VARCHAR}, #{firstHolderName,jdbcType=VARCHAR}, #{firstHolderPct,jdbcType=DOUBLE}, 
+      #{sInfoAdministrativedivision1,jdbcType=VARCHAR}, #{sInfoAdministrativedivision2,jdbcType=VARCHAR}, 
+      #{sInfoAdministrativedivision3,jdbcType=VARCHAR}, #{companyNameFulltext,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.bbd.csrc.dataparse.domain.CompanyBasicInfo">
+        insert into company_basic_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="bbdQyxxId != null">
+                bbd_qyxx_id,
+            </if>
+            <if test="legalRepresentative != null">
+                legal_representative,
+            </if>
+            <if test="registerAddress != null">
+                register_address,
+            </if>
+            <if test="tel != null">
+                tel,
+            </if>
+            <if test="registerDate != null">
+                register_date,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="registerAmount != null">
+                register_amount,
+            </if>
+            <if test="ipoType != null">
+                ipo_type,
+            </if>
+            <if test="marketValue != null">
+                market_value,
+            </if>
+            <if test="yearAssert != null">
+                year_assert,
+            </if>
+            <if test="yearProfit != null">
+                year_profit,
+            </if>
+            <if test="stockCode != null">
+                stock_code,
+            </if>
+            <if test="ipoDate != null">
+                ipo_date,
+            </if>
+            <if test="securityName != null">
+                security_name,
+            </if>
+            <if test="employeeAmount != null">
+                employee_amount,
+            </if>
+            <if test="firstIndustryCode != null">
+                first_industry_code,
+            </if>
+            <if test="secondIndustryCode != null">
+                second_industry_code,
+            </if>
+            <if test="partTime != null">
+                part_time,
+            </if>
+            <if test="independentBoardAmount != null">
+                independent_board_amount,
+            </if>
+            <if test="independentBoardRatio != null">
+                independent_board_ratio,
+            </if>
+            <if test="shareHoldingRatio != null">
+                share_holding_ratio,
+            </if>
+            <if test="accountingFirmChange != null">
+                accounting_firm_change,
+            </if>
+            <if test="relatedPersonSubjectToEnforcement != null">
+                related_person_subject_to_enforcement,
+            </if>
+            <if test="relatedBreakFaithPersonSubjectToEnforcement != null">
+                related_break_faith_person_subject_to_enforcement,
+            </if>
+            <if test="relatedAdministrativePenaltyOfCsrc != null">
+                related_administrative_penalty_of_csrc,
+            </if>
+            <if test="relatedAdministrativePenaltyOfOtherGov != null">
+                related_administrative_penalty_of_other_gov,
+            </if>
+            <if test="relatedLetterOfExchange != null">
+                related_letter_of_exchange,
+            </if>
+            <if test="relatedSubLetterOfExchange != null">
+                related_sub_letter_of_exchange,
+            </if>
+            <if test="relatedJudicativePaper != null">
+                related_judicative_paper,
+            </if>
+            <if test="patentAmount != null">
+                patent_amount,
+            </if>
+            <if test="trademarkAmount != null">
+                trademark_amount,
+            </if>
+            <if test="softwareCopyrightAmount != null">
+                software_copyright_amount,
+            </if>
+            <if test="embranchmentAmount != null">
+                embranchment_amount,
+            </if>
+            <if test="existYear != null">
+                exist_year,
+            </if>
+            <if test="csrcPunishment != null">
+                csrc_punishment,
+            </if>
+            <if test="subLetterOfExchange != null">
+                sub_letter_of_exchange,
+            </if>
+            <if test="letterOfExchange != null">
+                letter_of_exchange,
+            </if>
+            <if test="personSubjectToEnforcement != null">
+                person_subject_to_enforcement,
+            </if>
+            <if test="loseALawsuit != null">
+                lose_a_lawsuit,
+            </if>
+            <if test="sHolderController != null">
+                s_holder_controller,
+            </if>
+            <if test="agencyExaccountant != null">
+                agency_exaccountant,
+            </if>
+            <if test="sInfoExchmarket != null">
+                s_info_exchmarket,
+            </if>
+            <if test="firstHolderName != null">
+                first_holder_name,
+            </if>
+            <if test="firstHolderPct != null">
+                first_holder_pct,
+            </if>
+            <if test="sInfoAdministrativedivision1 != null">
+                s_info_administrativedivision1,
+            </if>
+            <if test="sInfoAdministrativedivision2 != null">
+                s_info_administrativedivision2,
+            </if>
+            <if test="sInfoAdministrativedivision3 != null">
+                s_info_administrativedivision3,
+            </if>
+            <if test="companyNameFulltext != null">
+                company_name_fulltext,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyName != null">
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="bbdQyxxId != null">
+                #{bbdQyxxId,jdbcType=VARCHAR},
+            </if>
+            <if test="legalRepresentative != null">
+                #{legalRepresentative,jdbcType=VARCHAR},
+            </if>
+            <if test="registerAddress != null">
+                #{registerAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null">
+                #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="registerDate != null">
+                #{registerDate,jdbcType=DATE},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="registerAmount != null">
+                #{registerAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="ipoType != null">
+                #{ipoType,jdbcType=VARCHAR},
+            </if>
+            <if test="marketValue != null">
+                #{marketValue,jdbcType=DOUBLE},
+            </if>
+            <if test="yearAssert != null">
+                #{yearAssert,jdbcType=DOUBLE},
+            </if>
+            <if test="yearProfit != null">
+                #{yearProfit,jdbcType=DOUBLE},
+            </if>
+            <if test="stockCode != null">
+                #{stockCode,jdbcType=VARCHAR},
+            </if>
+            <if test="ipoDate != null">
+                #{ipoDate,jdbcType=DATE},
+            </if>
+            <if test="securityName != null">
+                #{securityName,jdbcType=VARCHAR},
+            </if>
+            <if test="employeeAmount != null">
+                #{employeeAmount,jdbcType=INTEGER},
+            </if>
+            <if test="firstIndustryCode != null">
+                #{firstIndustryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="secondIndustryCode != null">
+                #{secondIndustryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="partTime != null">
+                #{partTime,jdbcType=BIT},
+            </if>
+            <if test="independentBoardAmount != null">
+                #{independentBoardAmount,jdbcType=INTEGER},
+            </if>
+            <if test="independentBoardRatio != null">
+                #{independentBoardRatio,jdbcType=DOUBLE},
+            </if>
+            <if test="shareHoldingRatio != null">
+                #{shareHoldingRatio,jdbcType=DOUBLE},
+            </if>
+            <if test="accountingFirmChange != null">
+                #{accountingFirmChange,jdbcType=BIT},
+            </if>
+            <if test="relatedPersonSubjectToEnforcement != null">
+                #{relatedPersonSubjectToEnforcement,jdbcType=INTEGER},
+            </if>
+            <if test="relatedBreakFaithPersonSubjectToEnforcement != null">
+                #{relatedBreakFaithPersonSubjectToEnforcement,jdbcType=INTEGER},
+            </if>
+            <if test="relatedAdministrativePenaltyOfCsrc != null">
+                #{relatedAdministrativePenaltyOfCsrc,jdbcType=INTEGER},
+            </if>
+            <if test="relatedAdministrativePenaltyOfOtherGov != null">
+                #{relatedAdministrativePenaltyOfOtherGov,jdbcType=INTEGER},
+            </if>
+            <if test="relatedLetterOfExchange != null">
+                #{relatedLetterOfExchange,jdbcType=INTEGER},
+            </if>
+            <if test="relatedSubLetterOfExchange != null">
+                #{relatedSubLetterOfExchange,jdbcType=INTEGER},
+            </if>
+            <if test="relatedJudicativePaper != null">
+                #{relatedJudicativePaper,jdbcType=INTEGER},
+            </if>
+            <if test="patentAmount != null">
+                #{patentAmount,jdbcType=INTEGER},
+            </if>
+            <if test="trademarkAmount != null">
+                #{trademarkAmount,jdbcType=INTEGER},
+            </if>
+            <if test="softwareCopyrightAmount != null">
+                #{softwareCopyrightAmount,jdbcType=INTEGER},
+            </if>
+            <if test="embranchmentAmount != null">
+                #{embranchmentAmount,jdbcType=INTEGER},
+            </if>
+            <if test="existYear != null">
+                #{existYear,jdbcType=DOUBLE},
+            </if>
+            <if test="csrcPunishment != null">
+                #{csrcPunishment,jdbcType=BIT},
+            </if>
+            <if test="subLetterOfExchange != null">
+                #{subLetterOfExchange,jdbcType=INTEGER},
+            </if>
+            <if test="letterOfExchange != null">
+                #{letterOfExchange,jdbcType=INTEGER},
+            </if>
+            <if test="personSubjectToEnforcement != null">
+                #{personSubjectToEnforcement,jdbcType=INTEGER},
+            </if>
+            <if test="loseALawsuit != null">
+                #{loseALawsuit,jdbcType=INTEGER},
+            </if>
+            <if test="sHolderController != null">
+                #{sHolderController,jdbcType=VARCHAR},
+            </if>
+            <if test="agencyExaccountant != null">
+                #{agencyExaccountant,jdbcType=VARCHAR},
+            </if>
+            <if test="sInfoExchmarket != null">
+                #{sInfoExchmarket,jdbcType=VARCHAR},
+            </if>
+            <if test="firstHolderName != null">
+                #{firstHolderName,jdbcType=VARCHAR},
+            </if>
+            <if test="firstHolderPct != null">
+                #{firstHolderPct,jdbcType=DOUBLE},
+            </if>
+            <if test="sInfoAdministrativedivision1 != null">
+                #{sInfoAdministrativedivision1,jdbcType=VARCHAR},
+            </if>
+            <if test="sInfoAdministrativedivision2 != null">
+                #{sInfoAdministrativedivision2,jdbcType=VARCHAR},
+            </if>
+            <if test="sInfoAdministrativedivision3 != null">
+                #{sInfoAdministrativedivision3,jdbcType=VARCHAR},
+            </if>
+            <if test="companyNameFulltext != null">
+                #{companyNameFulltext,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bbd.csrc.dataparse.domain.CompanyBasicInfo">
+        update company_basic_info
+        <set>
+            <if test="bbdQyxxId != null">
+                bbd_qyxx_id = #{bbdQyxxId,jdbcType=VARCHAR},
+            </if>
+            <if test="legalRepresentative != null">
+                legal_representative = #{legalRepresentative,jdbcType=VARCHAR},
+            </if>
+            <if test="registerAddress != null">
+                register_address = #{registerAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null">
+                tel = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="registerDate != null">
+                register_date = #{registerDate,jdbcType=DATE},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="registerAmount != null">
+                register_amount = #{registerAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="ipoType != null">
+                ipo_type = #{ipoType,jdbcType=VARCHAR},
+            </if>
+            <if test="marketValue != null">
+                market_value = #{marketValue,jdbcType=DOUBLE},
+            </if>
+            <if test="yearAssert != null">
+                year_assert = #{yearAssert,jdbcType=DOUBLE},
+            </if>
+            <if test="yearProfit != null">
+                year_profit = #{yearProfit,jdbcType=DOUBLE},
+            </if>
+            <if test="stockCode != null">
+                stock_code = #{stockCode,jdbcType=VARCHAR},
+            </if>
+            <if test="ipoDate != null">
+                ipo_date = #{ipoDate,jdbcType=DATE},
+            </if>
+            <if test="securityName != null">
+                security_name = #{securityName,jdbcType=VARCHAR},
+            </if>
+            <if test="employeeAmount != null">
+                employee_amount = #{employeeAmount,jdbcType=INTEGER},
+            </if>
+            <if test="firstIndustryCode != null">
+                first_industry_code = #{firstIndustryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="secondIndustryCode != null">
+                second_industry_code = #{secondIndustryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="partTime != null">
+                part_time = #{partTime,jdbcType=BIT},
+            </if>
+            <if test="independentBoardAmount != null">
+                independent_board_amount = #{independentBoardAmount,jdbcType=INTEGER},
+            </if>
+            <if test="independentBoardRatio != null">
+                independent_board_ratio = #{independentBoardRatio,jdbcType=DOUBLE},
+            </if>
+            <if test="shareHoldingRatio != null">
+                share_holding_ratio = #{shareHoldingRatio,jdbcType=DOUBLE},
+            </if>
+            <if test="accountingFirmChange != null">
+                accounting_firm_change = #{accountingFirmChange,jdbcType=BIT},
+            </if>
+            <if test="relatedPersonSubjectToEnforcement != null">
+                related_person_subject_to_enforcement = #{relatedPersonSubjectToEnforcement,jdbcType=INTEGER},
+            </if>
+            <if test="relatedBreakFaithPersonSubjectToEnforcement != null">
+                related_break_faith_person_subject_to_enforcement =
+                #{relatedBreakFaithPersonSubjectToEnforcement,jdbcType=INTEGER},
+            </if>
+            <if test="relatedAdministrativePenaltyOfCsrc != null">
+                related_administrative_penalty_of_csrc = #{relatedAdministrativePenaltyOfCsrc,jdbcType=INTEGER},
+            </if>
+            <if test="relatedAdministrativePenaltyOfOtherGov != null">
+                related_administrative_penalty_of_other_gov =
+                #{relatedAdministrativePenaltyOfOtherGov,jdbcType=INTEGER},
+            </if>
+            <if test="relatedLetterOfExchange != null">
+                related_letter_of_exchange = #{relatedLetterOfExchange,jdbcType=INTEGER},
+            </if>
+            <if test="relatedSubLetterOfExchange != null">
+                related_sub_letter_of_exchange = #{relatedSubLetterOfExchange,jdbcType=INTEGER},
+            </if>
+            <if test="relatedJudicativePaper != null">
+                related_judicative_paper = #{relatedJudicativePaper,jdbcType=INTEGER},
+            </if>
+            <if test="patentAmount != null">
+                patent_amount = #{patentAmount,jdbcType=INTEGER},
+            </if>
+            <if test="trademarkAmount != null">
+                trademark_amount = #{trademarkAmount,jdbcType=INTEGER},
+            </if>
+            <if test="softwareCopyrightAmount != null">
+                software_copyright_amount = #{softwareCopyrightAmount,jdbcType=INTEGER},
+            </if>
+            <if test="embranchmentAmount != null">
+                embranchment_amount = #{embranchmentAmount,jdbcType=INTEGER},
+            </if>
+            <if test="existYear != null">
+                exist_year = #{existYear,jdbcType=DOUBLE},
+            </if>
+            <if test="csrcPunishment != null">
+                csrc_punishment = #{csrcPunishment,jdbcType=BIT},
+            </if>
+            <if test="subLetterOfExchange != null">
+                sub_letter_of_exchange = #{subLetterOfExchange,jdbcType=INTEGER},
+            </if>
+            <if test="letterOfExchange != null">
+                letter_of_exchange = #{letterOfExchange,jdbcType=INTEGER},
+            </if>
+            <if test="personSubjectToEnforcement != null">
+                person_subject_to_enforcement = #{personSubjectToEnforcement,jdbcType=INTEGER},
+            </if>
+            <if test="loseALawsuit != null">
+                lose_a_lawsuit = #{loseALawsuit,jdbcType=INTEGER},
+            </if>
+            <if test="sHolderController != null">
+                s_holder_controller = #{sHolderController,jdbcType=VARCHAR},
+            </if>
+            <if test="agencyExaccountant != null">
+                agency_exaccountant = #{agencyExaccountant,jdbcType=VARCHAR},
+            </if>
+            <if test="sInfoExchmarket != null">
+                s_info_exchmarket = #{sInfoExchmarket,jdbcType=VARCHAR},
+            </if>
+            <if test="firstHolderName != null">
+                first_holder_name = #{firstHolderName,jdbcType=VARCHAR},
+            </if>
+            <if test="firstHolderPct != null">
+                first_holder_pct = #{firstHolderPct,jdbcType=DOUBLE},
+            </if>
+            <if test="sInfoAdministrativedivision1 != null">
+                s_info_administrativedivision1 = #{sInfoAdministrativedivision1,jdbcType=VARCHAR},
+            </if>
+            <if test="sInfoAdministrativedivision2 != null">
+                s_info_administrativedivision2 = #{sInfoAdministrativedivision2,jdbcType=VARCHAR},
+            </if>
+            <if test="sInfoAdministrativedivision3 != null">
+                s_info_administrativedivision3 = #{sInfoAdministrativedivision3,jdbcType=VARCHAR},
+            </if>
+            <if test="companyNameFulltext != null">
+                company_name_fulltext = #{companyNameFulltext,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where company_name = #{companyName,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bbd.csrc.dataparse.domain.CompanyBasicInfo">
+    update company_basic_info
+    set bbd_qyxx_id = #{bbdQyxxId,jdbcType=VARCHAR},
+      legal_representative = #{legalRepresentative,jdbcType=VARCHAR},
+      register_address = #{registerAddress,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      register_date = #{registerDate,jdbcType=DATE},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      register_amount = #{registerAmount,jdbcType=DOUBLE},
+      ipo_type = #{ipoType,jdbcType=VARCHAR},
+      market_value = #{marketValue,jdbcType=DOUBLE},
+      year_assert = #{yearAssert,jdbcType=DOUBLE},
+      year_profit = #{yearProfit,jdbcType=DOUBLE},
+      stock_code = #{stockCode,jdbcType=VARCHAR},
+      ipo_date = #{ipoDate,jdbcType=DATE},
+      security_name = #{securityName,jdbcType=VARCHAR},
+      employee_amount = #{employeeAmount,jdbcType=INTEGER},
+      first_industry_code = #{firstIndustryCode,jdbcType=VARCHAR},
+      second_industry_code = #{secondIndustryCode,jdbcType=VARCHAR},
+      part_time = #{partTime,jdbcType=BIT},
+      independent_board_amount = #{independentBoardAmount,jdbcType=INTEGER},
+      independent_board_ratio = #{independentBoardRatio,jdbcType=DOUBLE},
+      share_holding_ratio = #{shareHoldingRatio,jdbcType=DOUBLE},
+      accounting_firm_change = #{accountingFirmChange,jdbcType=BIT},
+      related_person_subject_to_enforcement = #{relatedPersonSubjectToEnforcement,jdbcType=INTEGER},
+      related_break_faith_person_subject_to_enforcement = #{relatedBreakFaithPersonSubjectToEnforcement,jdbcType=INTEGER},
+      related_administrative_penalty_of_csrc = #{relatedAdministrativePenaltyOfCsrc,jdbcType=INTEGER},
+      related_administrative_penalty_of_other_gov = #{relatedAdministrativePenaltyOfOtherGov,jdbcType=INTEGER},
+      related_letter_of_exchange = #{relatedLetterOfExchange,jdbcType=INTEGER},
+      related_sub_letter_of_exchange = #{relatedSubLetterOfExchange,jdbcType=INTEGER},
+      related_judicative_paper = #{relatedJudicativePaper,jdbcType=INTEGER},
+      patent_amount = #{patentAmount,jdbcType=INTEGER},
+      trademark_amount = #{trademarkAmount,jdbcType=INTEGER},
+      software_copyright_amount = #{softwareCopyrightAmount,jdbcType=INTEGER},
+      embranchment_amount = #{embranchmentAmount,jdbcType=INTEGER},
+      exist_year = #{existYear,jdbcType=DOUBLE},
+      csrc_punishment = #{csrcPunishment,jdbcType=BIT},
+      sub_letter_of_exchange = #{subLetterOfExchange,jdbcType=INTEGER},
+      letter_of_exchange = #{letterOfExchange,jdbcType=INTEGER},
+      person_subject_to_enforcement = #{personSubjectToEnforcement,jdbcType=INTEGER},
+      lose_a_lawsuit = #{loseALawsuit,jdbcType=INTEGER},
+      s_holder_controller = #{sHolderController,jdbcType=VARCHAR},
+      agency_exaccountant = #{agencyExaccountant,jdbcType=VARCHAR},
+      s_info_exchmarket = #{sInfoExchmarket,jdbcType=VARCHAR},
+      first_holder_name = #{firstHolderName,jdbcType=VARCHAR},
+      first_holder_pct = #{firstHolderPct,jdbcType=DOUBLE},
+      s_info_administrativedivision1 = #{sInfoAdministrativedivision1,jdbcType=VARCHAR},
+      s_info_administrativedivision2 = #{sInfoAdministrativedivision2,jdbcType=VARCHAR},
+      s_info_administrativedivision3 = #{sInfoAdministrativedivision3,jdbcType=VARCHAR},
+      company_name_fulltext = #{companyNameFulltext,jdbcType=VARCHAR}
+    where company_name = #{companyName,jdbcType=VARCHAR}
+  </update>
+    <!--<update id="updateBatchByStockCode">-->
+        <!--<foreach collection="list" item="item" index="index" open="" close="" separator=";">-->
+            <!--update company_basic_info-->
+            <!--set part_time = #{item.partTime,jdbcType=BIT},-->
+            <!--independent_board_amount = #{item.independentBoardAmount,jdbcType=INTEGER},-->
+            <!--independent_board_ratio = #{item.independentBoardRatio,jdbcType=DOUBLE}-->
+            <!--where stock_code = #{item.stockCode,jdbcType=VARCHAR}-->
+        <!--</foreach>-->
+    <!--</update>-->
+    <update id="updateBatchByStockCode">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update company_basic_info
+            <set>
+                <if test="item.bbdQyxxId != null">
+                    bbd_qyxx_id = #{item.bbdQyxxId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.legalRepresentative != null">
+                    legal_representative = #{item.legalRepresentative,jdbcType=VARCHAR},
+                </if>
+                <if test="item.registerAddress != null">
+                    register_address = #{item.registerAddress,jdbcType=VARCHAR},
+                </if>
+                <if test="item.tel != null">
+                    tel = #{item.tel,jdbcType=VARCHAR},
+                </if>
+                <if test="item.registerDate != null">
+                    register_date = #{item.registerDate,jdbcType=DATE},
+                </if>
+                <if test="item.province != null">
+                    province = #{item.province,jdbcType=VARCHAR},
+                </if>
+                <if test="item.city != null">
+                    city = #{item.city,jdbcType=VARCHAR},
+                </if>
+                <if test="item.registerAmount != null">
+                    register_amount = #{item.registerAmount,jdbcType=DOUBLE},
+                </if>
+                <if test="item.ipoType != null">
+                    ipo_type = #{item.ipoType,jdbcType=VARCHAR},
+                </if>
+                <if test="item.marketValue != null">
+                    market_value = #{item.marketValue,jdbcType=DOUBLE},
+                </if>
+                <if test="item.yearAssert != null">
+                    year_assert = #{item.yearAssert,jdbcType=DOUBLE},
+                </if>
+                <if test="item.yearProfit != null">
+                    year_profit = #{item.yearProfit,jdbcType=DOUBLE},
+                </if>
+                <!--<if test="item.stockCode != null">-->
+                    <!--stock_code = #{item.stockCode,jdbcType=VARCHAR},-->
+                <!--</if>-->
+                <if test="item.ipoDate != null">
+                    ipo_date = #{item.ipoDate,jdbcType=DATE},
+                </if>
+                <if test="item.securityName != null">
+                    security_name = #{item.securityName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.employeeAmount != null">
+                    employee_amount = #{item.employeeAmount,jdbcType=INTEGER},
+                </if>
+                <if test="item.firstIndustryCode != null">
+                    first_industry_code = #{item.firstIndustryCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.secondIndustryCode != null">
+                    second_industry_code = #{item.secondIndustryCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.partTime != null">
+                    part_time = #{item.partTime,jdbcType=BIT},
+                </if>
+                <if test="item.independentBoardAmount != null">
+                    independent_board_amount = #{item.independentBoardAmount,jdbcType=INTEGER},
+                </if>
+                <if test="item.independentBoardRatio != null">
+                    independent_board_ratio = #{item.independentBoardRatio,jdbcType=DOUBLE},
+                </if>
+                <if test="item.shareHoldingRatio != null">
+                    share_holding_ratio = #{item.shareHoldingRatio,jdbcType=DOUBLE},
+                </if>
+                <if test="item.accountingFirmChange != null">
+                    accounting_firm_change = #{item.accountingFirmChange,jdbcType=BIT},
+                </if>
+                <if test="item.relatedPersonSubjectToEnforcement != null">
+                    related_person_subject_to_enforcement = #{item.relatedPersonSubjectToEnforcement,jdbcType=INTEGER},
+                </if>
+                <if test="item.relatedBreakFaithPersonSubjectToEnforcement != null">
+                    related_break_faith_person_subject_to_enforcement =
+                    #{item.relatedBreakFaithPersonSubjectToEnforcement,jdbcType=INTEGER},
+                </if>
+                <if test="item.relatedAdministrativePenaltyOfCsrc != null">
+                    related_administrative_penalty_of_csrc = #{item.relatedAdministrativePenaltyOfCsrc,jdbcType=INTEGER},
+                </if>
+                <if test="item.relatedAdministrativePenaltyOfOtherGov != null">
+                    related_administrative_penalty_of_other_gov =
+                    #{item.relatedAdministrativePenaltyOfOtherGov,jdbcType=INTEGER},
+                </if>
+                <if test="item.relatedLetterOfExchange != null">
+                    related_letter_of_exchange = #{item.relatedLetterOfExchange,jdbcType=INTEGER},
+                </if>
+                <if test="item.relatedSubLetterOfExchange != null">
+                    related_sub_letter_of_exchange = #{item.relatedSubLetterOfExchange,jdbcType=INTEGER},
+                </if>
+                <if test="item.relatedJudicativePaper != null">
+                    related_judicative_paper = #{item.relatedJudicativePaper,jdbcType=INTEGER},
+                </if>
+                <if test="item.patentAmount != null">
+                    patent_amount = #{item.patentAmount,jdbcType=INTEGER},
+                </if>
+                <if test="item.trademarkAmount != null">
+                    trademark_amount = #{item.trademarkAmount,jdbcType=INTEGER},
+                </if>
+                <if test="item.softwareCopyrightAmount != null">
+                    software_copyright_amount = #{item.softwareCopyrightAmount,jdbcType=INTEGER},
+                </if>
+                <if test="item.embranchmentAmount != null">
+                    embranchment_amount = #{item.embranchmentAmount,jdbcType=INTEGER},
+                </if>
+                <if test="item.existYear != null">
+                    exist_year = #{item.existYear,jdbcType=DOUBLE},
+                </if>
+                <if test="item.csrcPunishment != null">
+                    csrc_punishment = #{item.csrcPunishment,jdbcType=BIT},
+                </if>
+                <if test="item.subLetterOfExchange != null">
+                    sub_letter_of_exchange = #{item.subLetterOfExchange,jdbcType=INTEGER},
+                </if>
+                <if test="item.letterOfExchange != null">
+                    letter_of_exchange = #{item.letterOfExchange,jdbcType=INTEGER},
+                </if>
+                <if test="item.personSubjectToEnforcement != null">
+                    person_subject_to_enforcement = #{item.personSubjectToEnforcement,jdbcType=INTEGER},
+                </if>
+                <if test="item.loseALawsuit != null">
+                    lose_a_lawsuit = #{item.loseALawsuit,jdbcType=INTEGER},
+                </if>
+                <if test="item.sHolderController != null">
+                    s_holder_controller = #{item.sHolderController,jdbcType=VARCHAR},
+                </if>
+                <if test="item.agencyExaccountant != null">
+                    agency_exaccountant = #{item.agencyExaccountant,jdbcType=VARCHAR},
+                </if>
+                <if test="item.sInfoExchmarket != null">
+                    s_info_exchmarket = #{item.sInfoExchmarket,jdbcType=VARCHAR},
+                </if>
+                <if test="item.firstHolderName != null">
+                    first_holder_name = #{item.firstHolderName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.firstHolderPct != null">
+                    first_holder_pct = #{item.firstHolderPct,jdbcType=DOUBLE},
+                </if>
+                <if test="item.sInfoAdministrativedivision1 != null">
+                    s_info_administrativedivision1 = #{item.sInfoAdministrativedivision1,jdbcType=VARCHAR},
+                </if>
+                <if test="item.sInfoAdministrativedivision2 != null">
+                    s_info_administrativedivision2 = #{item.sInfoAdministrativedivision2,jdbcType=VARCHAR},
+                </if>
+                <if test="item.sInfoAdministrativedivision3 != null">
+                    s_info_administrativedivision3 = #{item.sInfoAdministrativedivision3,jdbcType=VARCHAR},
+                </if>
+                <if test="item.companyNameFulltext != null">
+                    company_name_fulltext = #{item.companyNameFulltext,jdbcType=VARCHAR},
+                </if>
+            </set>
+            where stock_code = #{item.stockCode,jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
+
+</mapper>

@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbd.csrc.dataparse.dao.TableSamplePledgeLiquidatedDAO">
+    <resultMap id="BaseResultMap" type="com.bbd.csrc.dataparse.domain.TableSamplePledgeLiquidated">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="company_name" jdbcType="VARCHAR" property="公司名称"/>
+        <result column="score" jdbcType="VARCHAR" property="分数"/>
+        <result column="RECEREDU" jdbcType="VARCHAR" property="RECEREDU"/>
+        <result column="A43" jdbcType="VARCHAR" property="a43"/>
+        <result column="PrepzzlminusBIZCOSTzzl" jdbcType="VARCHAR" property="prepzzlminusBIZCOSTzzl"/>
+        <result column="NCFToOperatingProfit" jdbcType="VARCHAR" property="NCFToOperatingProfit"/>
+        <result column="OTHERRECE" jdbcType="VARCHAR" property="OTHERRECE"/>
+        <result column="BIZCOSTzzl" jdbcType="VARCHAR" property="BIZCOSTzzl"/>
+        <result column="OTHERPAY" jdbcType="VARCHAR" property="OTHERPAY"/>
+        <result column="COMPINCOAMT" jdbcType="VARCHAR" property="COMPINCOAMT"/>
+        <result column="PREPzzl" jdbcType="VARCHAR" property="PREPzzl"/>
+        <result column="ROEWEIGHTED" jdbcType="VARCHAR" property="ROEWEIGHTED"/>
+        <result column="PREPtoLABOPAYC" jdbcType="VARCHAR" property="PREPtoLABOPAYC"/>
+        <result column="CashflowInterestCoverageRatio" jdbcType="VARCHAR" property="cashflowInterestCoverageRatio"/>
+        <result column="AverageINVE" jdbcType="VARCHAR" property="averageINVE"/>
+        <result column="BIZTAX" jdbcType="VARCHAR" property="BIZTAX"/>
+        <result column="ROEzzl" jdbcType="VARCHAR" property="ROEzzl"/>
+        <result column="ADVAPAYMzzl" jdbcType="VARCHAR" property="ADVAPAYMzzl"/>
+        <result column="FINCASHOUTF" jdbcType="VARCHAR" property="FINCASHOUTF"/>
+        <result column="NetProfitToCurrentAsset" jdbcType="VARCHAR" property="netProfitToCurrentAsset"/>
+        <result column="COPEWORKERSALzzl" jdbcType="VARCHAR" property="COPEWORKERSALzzl"/>
+        <result column="InventoryTurnover" jdbcType="VARCHAR" property="inventoryTurnover"/>
+        <result column="bbd_qyxx_id" jdbcType="VARCHAR" property="bbdQyxxId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, company_name, score, RECEREDU, A43, PrepzzlminusBIZCOSTzzl, NCFToOperatingProfit,
+    OTHERRECE, BIZCOSTzzl, OTHERPAY, COMPINCOAMT, PREPzzl, ROEWEIGHTED, PREPtoLABOPAYC, 
+    CashflowInterestCoverageRatio, AverageINVE, BIZTAX, ROEzzl, ADVAPAYMzzl, FINCASHOUTF, 
+    NetProfitToCurrentAsset, COPEWORKERSALzzl, InventoryTurnover, bbd_qyxx_id
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from table_sample_pledge_liquidated
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="queryByCompanyName" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from table_sample_pledge_liquidated
+        where company_name = #{公司名称,jdbcType=INTEGER}
+    </select>
+    <select id="truncateTable">
+        truncate table table_sample_pledge_liquidated
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from table_sample_pledge_liquidated
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.TableSamplePledgeLiquidated" useGeneratedKeys="true">
+    insert into table_sample_pledge_liquidated (company_name, score, RECEREDU,
+      A43, PrepzzlminusBIZCOSTzzl, NCFToOperatingProfit, 
+      OTHERRECE, BIZCOSTzzl, OTHERPAY, 
+      COMPINCOAMT, PREPzzl, ROEWEIGHTED, 
+      PREPtoLABOPAYC, CashflowInterestCoverageRatio, 
+      AverageINVE, BIZTAX, ROEzzl, 
+      ADVAPAYMzzl, FINCASHOUTF, NetProfitToCurrentAsset, 
+      COPEWORKERSALzzl, InventoryTurnover, bbd_qyxx_id
+      )
+    values (#{公司名称,jdbcType=VARCHAR}, #{分数,jdbcType=VARCHAR}, #{RECEREDU,jdbcType=VARCHAR},
+      #{a43,jdbcType=VARCHAR}, #{prepzzlminusBIZCOSTzzl,jdbcType=VARCHAR}, #{NCFToOperatingProfit,jdbcType=VARCHAR}, 
+      #{OTHERRECE,jdbcType=VARCHAR}, #{BIZCOSTzzl,jdbcType=VARCHAR}, #{OTHERPAY,jdbcType=VARCHAR}, 
+      #{COMPINCOAMT,jdbcType=VARCHAR}, #{PREPzzl,jdbcType=VARCHAR}, #{ROEWEIGHTED,jdbcType=VARCHAR}, 
+      #{PREPtoLABOPAYC,jdbcType=VARCHAR}, #{cashflowInterestCoverageRatio,jdbcType=VARCHAR}, 
+      #{averageINVE,jdbcType=VARCHAR}, #{BIZTAX,jdbcType=VARCHAR}, #{ROEzzl,jdbcType=VARCHAR}, 
+      #{ADVAPAYMzzl,jdbcType=VARCHAR}, #{FINCASHOUTF,jdbcType=VARCHAR}, #{netProfitToCurrentAsset,jdbcType=VARCHAR}, 
+      #{COPEWORKERSALzzl,jdbcType=VARCHAR}, #{inventoryTurnover,jdbcType=VARCHAR}, #{bbdQyxxId,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertBatch" parameterType="list">
+        insert into table_sample_pledge_liquidated (company_name, score, RECEREDU,
+        A43, PrepzzlminusBIZCOSTzzl, NCFToOperatingProfit,
+        OTHERRECE, BIZCOSTzzl, OTHERPAY,
+        COMPINCOAMT, PREPzzl, ROEWEIGHTED,
+        PREPtoLABOPAYC, CashflowInterestCoverageRatio,
+        AverageINVE, BIZTAX, ROEzzl,
+        ADVAPAYMzzl, FINCASHOUTF, NetProfitToCurrentAsset,
+        COPEWORKERSALzzl, InventoryTurnover, bbd_qyxx_id
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.公司名称,jdbcType=VARCHAR}, #{item.分数,jdbcType=VARCHAR}, #{item.RECEREDU,jdbcType=VARCHAR},
+            #{item.a43,jdbcType=VARCHAR}, #{item.prepzzlminusBIZCOSTzzl,jdbcType=VARCHAR},
+            #{item.NCFToOperatingProfit,jdbcType=VARCHAR},
+            #{item.OTHERRECE,jdbcType=VARCHAR}, #{item.BIZCOSTzzl,jdbcType=VARCHAR}, #{item.OTHERPAY,jdbcType=VARCHAR},
+            #{item.COMPINCOAMT,jdbcType=VARCHAR}, #{item.PREPzzl,jdbcType=VARCHAR},
+            #{item.ROEWEIGHTED,jdbcType=VARCHAR},
+            #{item.PREPtoLABOPAYC,jdbcType=VARCHAR}, #{item.cashflowInterestCoverageRatio,jdbcType=VARCHAR},
+            #{item.averageINVE,jdbcType=VARCHAR}, #{item.BIZTAX,jdbcType=VARCHAR}, #{item.ROEzzl,jdbcType=VARCHAR},
+            #{item.ADVAPAYMzzl,jdbcType=VARCHAR}, #{item.FINCASHOUTF,jdbcType=VARCHAR},
+            #{item.netProfitToCurrentAsset,jdbcType=VARCHAR},
+            #{item.COPEWORKERSALzzl,jdbcType=VARCHAR}, #{item.inventoryTurnover,jdbcType=VARCHAR},
+            #{item.bbdQyxxId,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.TableSamplePledgeLiquidated" useGeneratedKeys="true">
+        insert into table_sample_pledge_liquidated
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="company_name != null">
+                company_name,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="RECEREDU != null">
+                RECEREDU,
+            </if>
+            <if test="a43 != null">
+                A43,
+            </if>
+            <if test="prepzzlminusBIZCOSTzzl != null">
+                PrepzzlminusBIZCOSTzzl,
+            </if>
+            <if test="NCFToOperatingProfit != null">
+                NCFToOperatingProfit,
+            </if>
+            <if test="OTHERRECE != null">
+                OTHERRECE,
+            </if>
+            <if test="BIZCOSTzzl != null">
+                BIZCOSTzzl,
+            </if>
+            <if test="OTHERPAY != null">
+                OTHERPAY,
+            </if>
+            <if test="COMPINCOAMT != null">
+                COMPINCOAMT,
+            </if>
+            <if test="PREPzzl != null">
+                PREPzzl,
+            </if>
+            <if test="ROEWEIGHTED != null">
+                ROEWEIGHTED,
+            </if>
+            <if test="PREPtoLABOPAYC != null">
+                PREPtoLABOPAYC,
+            </if>
+            <if test="cashflowInterestCoverageRatio != null">
+                CashflowInterestCoverageRatio,
+            </if>
+            <if test="averageINVE != null">
+                AverageINVE,
+            </if>
+            <if test="BIZTAX != null">
+                BIZTAX,
+            </if>
+            <if test="ROEzzl != null">
+                ROEzzl,
+            </if>
+            <if test="ADVAPAYMzzl != null">
+                ADVAPAYMzzl,
+            </if>
+            <if test="FINCASHOUTF != null">
+                FINCASHOUTF,
+            </if>
+            <if test="netProfitToCurrentAsset != null">
+                NetProfitToCurrentAsset,
+            </if>
+            <if test="COPEWORKERSALzzl != null">
+                COPEWORKERSALzzl,
+            </if>
+            <if test="inventoryTurnover != null">
+                InventoryTurnover,
+            </if>
+            <if test="bbd_qyxx_id != null">
+                bbd_qyxx_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="company_name != null">
+                #{company_name,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=VARCHAR},
+            </if>
+            <if test="RECEREDU != null">
+                #{RECEREDU,jdbcType=VARCHAR},
+            </if>
+            <if test="a43 != null">
+                #{a43,jdbcType=VARCHAR},
+            </if>
+            <if test="prepzzlminusBIZCOSTzzl != null">
+                #{prepzzlminusBIZCOSTzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="NCFToOperatingProfit != null">
+                #{NCFToOperatingProfit,jdbcType=VARCHAR},
+            </if>
+            <if test="OTHERRECE != null">
+                #{OTHERRECE,jdbcType=VARCHAR},
+            </if>
+            <if test="BIZCOSTzzl != null">
+                #{BIZCOSTzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="OTHERPAY != null">
+                #{OTHERPAY,jdbcType=VARCHAR},
+            </if>
+            <if test="COMPINCOAMT != null">
+                #{COMPINCOAMT,jdbcType=VARCHAR},
+            </if>
+            <if test="PREPzzl != null">
+                #{PREPzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="ROEWEIGHTED != null">
+                #{ROEWEIGHTED,jdbcType=VARCHAR},
+            </if>
+            <if test="PREPtoLABOPAYC != null">
+                #{PREPtoLABOPAYC,jdbcType=VARCHAR},
+            </if>
+            <if test="cashflowInterestCoverageRatio != null">
+                #{cashflowInterestCoverageRatio,jdbcType=VARCHAR},
+            </if>
+            <if test="averageINVE != null">
+                #{averageINVE,jdbcType=VARCHAR},
+            </if>
+            <if test="BIZTAX != null">
+                #{BIZTAX,jdbcType=VARCHAR},
+            </if>
+            <if test="ROEzzl != null">
+                #{ROEzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="ADVAPAYMzzl != null">
+                #{ADVAPAYMzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="FINCASHOUTF != null">
+                #{FINCASHOUTF,jdbcType=VARCHAR},
+            </if>
+            <if test="netProfitToCurrentAsset != null">
+                #{netProfitToCurrentAsset,jdbcType=VARCHAR},
+            </if>
+            <if test="COPEWORKERSALzzl != null">
+                #{COPEWORKERSALzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="inventoryTurnover != null">
+                #{inventoryTurnover,jdbcType=VARCHAR},
+            </if>
+            <if test="bbd_qyxx_id != null">
+                #{bbd_qyxx_id,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bbd.csrc.dataparse.domain.TableSamplePledgeLiquidated">
+        update table_sample_pledge_liquidated
+        <set>
+            <if test="company_name != null">
+                company_name = #{company_name,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=VARCHAR},
+            </if>
+            <if test="RECEREDU != null">
+                RECEREDU = #{RECEREDU,jdbcType=VARCHAR},
+            </if>
+            <if test="a43 != null">
+                A43 = #{a43,jdbcType=VARCHAR},
+            </if>
+            <if test="prepzzlminusBIZCOSTzzl != null">
+                PrepzzlminusBIZCOSTzzl = #{prepzzlminusBIZCOSTzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="NCFToOperatingProfit != null">
+                NCFToOperatingProfit = #{NCFToOperatingProfit,jdbcType=VARCHAR},
+            </if>
+            <if test="OTHERRECE != null">
+                OTHERRECE = #{OTHERRECE,jdbcType=VARCHAR},
+            </if>
+            <if test="BIZCOSTzzl != null">
+                BIZCOSTzzl = #{BIZCOSTzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="OTHERPAY != null">
+                OTHERPAY = #{OTHERPAY,jdbcType=VARCHAR},
+            </if>
+            <if test="COMPINCOAMT != null">
+                COMPINCOAMT = #{COMPINCOAMT,jdbcType=VARCHAR},
+            </if>
+            <if test="PREPzzl != null">
+                PREPzzl = #{PREPzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="ROEWEIGHTED != null">
+                ROEWEIGHTED = #{ROEWEIGHTED,jdbcType=VARCHAR},
+            </if>
+            <if test="PREPtoLABOPAYC != null">
+                PREPtoLABOPAYC = #{PREPtoLABOPAYC,jdbcType=VARCHAR},
+            </if>
+            <if test="cashflowInterestCoverageRatio != null">
+                CashflowInterestCoverageRatio = #{cashflowInterestCoverageRatio,jdbcType=VARCHAR},
+            </if>
+            <if test="averageINVE != null">
+                AverageINVE = #{averageINVE,jdbcType=VARCHAR},
+            </if>
+            <if test="BIZTAX != null">
+                BIZTAX = #{BIZTAX,jdbcType=VARCHAR},
+            </if>
+            <if test="ROEzzl != null">
+                ROEzzl = #{ROEzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="ADVAPAYMzzl != null">
+                ADVAPAYMzzl = #{ADVAPAYMzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="FINCASHOUTF != null">
+                FINCASHOUTF = #{FINCASHOUTF,jdbcType=VARCHAR},
+            </if>
+            <if test="netProfitToCurrentAsset != null">
+                NetProfitToCurrentAsset = #{netProfitToCurrentAsset,jdbcType=VARCHAR},
+            </if>
+            <if test="COPEWORKERSALzzl != null">
+                COPEWORKERSALzzl = #{COPEWORKERSALzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="inventoryTurnover != null">
+                InventoryTurnover = #{inventoryTurnover,jdbcType=VARCHAR},
+            </if>
+            <if test="bbd_qyxx_id != null">
+                bbd_qyxx_id = #{bbd_qyxx_id,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bbd.csrc.dataparse.domain.TableSamplePledgeLiquidated">
+    update table_sample_pledge_liquidated
+    set company_name = #{company_name,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      RECEREDU = #{RECEREDU,jdbcType=VARCHAR},
+      A43 = #{a43,jdbcType=VARCHAR},
+      PrepzzlminusBIZCOSTzzl = #{prepzzlminusBIZCOSTzzl,jdbcType=VARCHAR},
+      NCFToOperatingProfit = #{NCFToOperatingProfit,jdbcType=VARCHAR},
+      OTHERRECE = #{OTHERRECE,jdbcType=VARCHAR},
+      BIZCOSTzzl = #{BIZCOSTzzl,jdbcType=VARCHAR},
+      OTHERPAY = #{OTHERPAY,jdbcType=VARCHAR},
+      COMPINCOAMT = #{COMPINCOAMT,jdbcType=VARCHAR},
+      PREPzzl = #{PREPzzl,jdbcType=VARCHAR},
+      ROEWEIGHTED = #{ROEWEIGHTED,jdbcType=VARCHAR},
+      PREPtoLABOPAYC = #{PREPtoLABOPAYC,jdbcType=VARCHAR},
+      CashflowInterestCoverageRatio = #{cashflowInterestCoverageRatio,jdbcType=VARCHAR},
+      AverageINVE = #{averageINVE,jdbcType=VARCHAR},
+      BIZTAX = #{BIZTAX,jdbcType=VARCHAR},
+      ROEzzl = #{ROEzzl,jdbcType=VARCHAR},
+      ADVAPAYMzzl = #{ADVAPAYMzzl,jdbcType=VARCHAR},
+      FINCASHOUTF = #{FINCASHOUTF,jdbcType=VARCHAR},
+      NetProfitToCurrentAsset = #{netProfitToCurrentAsset,jdbcType=VARCHAR},
+      COPEWORKERSALzzl = #{COPEWORKERSALzzl,jdbcType=VARCHAR},
+      InventoryTurnover = #{inventoryTurnover,jdbcType=VARCHAR},
+      bbd_qyxx_id = #{bbd_qyxx_id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <update id="updateByCompanyName" parameterType="com.bbd.csrc.dataparse.domain.TableSamplePledgeLiquidated">
+    update table_sample_pledge_liquidated
+    set
+      score = #{分数,jdbcType=VARCHAR},
+      RECEREDU = #{RECEREDU,jdbcType=VARCHAR},
+      A43 = #{a43,jdbcType=VARCHAR},
+      PrepzzlminusBIZCOSTzzl = #{prepzzlminusBIZCOSTzzl,jdbcType=VARCHAR},
+      NCFToOperatingProfit = #{NCFToOperatingProfit,jdbcType=VARCHAR},
+      OTHERRECE = #{OTHERRECE,jdbcType=VARCHAR},
+      BIZCOSTzzl = #{BIZCOSTzzl,jdbcType=VARCHAR},
+      OTHERPAY = #{OTHERPAY,jdbcType=VARCHAR},
+      COMPINCOAMT = #{COMPINCOAMT,jdbcType=VARCHAR},
+      PREPzzl = #{PREPzzl,jdbcType=VARCHAR},
+      ROEWEIGHTED = #{ROEWEIGHTED,jdbcType=VARCHAR},
+      PREPtoLABOPAYC = #{PREPtoLABOPAYC,jdbcType=VARCHAR},
+      CashflowInterestCoverageRatio = #{cashflowInterestCoverageRatio,jdbcType=VARCHAR},
+      AverageINVE = #{averageINVE,jdbcType=VARCHAR},
+      BIZTAX = #{BIZTAX,jdbcType=VARCHAR},
+      ROEzzl = #{ROEzzl,jdbcType=VARCHAR},
+      ADVAPAYMzzl = #{ADVAPAYMzzl,jdbcType=VARCHAR},
+      FINCASHOUTF = #{FINCASHOUTF,jdbcType=VARCHAR},
+      NetProfitToCurrentAsset = #{netProfitToCurrentAsset,jdbcType=VARCHAR},
+      COPEWORKERSALzzl = #{COPEWORKERSALzzl,jdbcType=VARCHAR},
+      InventoryTurnover = #{inventoryTurnover,jdbcType=VARCHAR},
+      bbd_qyxx_id = #{bbdQyxxId,jdbcType=VARCHAR}
+    where company_name = #{公司名称,jdbcType=VARCHAR}
+  </update>
+</mapper>

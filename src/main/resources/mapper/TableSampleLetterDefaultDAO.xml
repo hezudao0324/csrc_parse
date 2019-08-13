@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbd.csrc.dataparse.dao.TableSampleLetterDefaultDAO">
+  <resultMap id="BaseResultMap" type="com.bbd.csrc.dataparse.domain.TableSampleLetterDefault">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="company_name" jdbcType="VARCHAR" property="公司名称" />
+    <result column="score" jdbcType="VARCHAR" property="分数" />
+    <result column="EPSBASICEPSCUT" jdbcType="VARCHAR" property="EPSBASICEPSCUT" />
+    <result column="EPSBASIC" jdbcType="VARCHAR" property="EPSBASIC" />
+    <result column="EPSFULLDILUTED" jdbcType="VARCHAR" property="EPSFULLDILUTED" />
+    <result column="BASICEPS" jdbcType="VARCHAR" property="BASICEPS" />
+    <result column="ROEWEIGHTEDCUT" jdbcType="VARCHAR" property="ROEWEIGHTEDCUT" />
+    <result column="DILUTEDEPS" jdbcType="VARCHAR" property="DILUTEDEPS" />
+    <result column="EPSFULLDILUTEDCUT" jdbcType="VARCHAR" property="EPSFULLDILUTEDCUT" />
+    <result column="RETonASS" jdbcType="VARCHAR" property="RETonASS" />
+    <result column="ROEWEIGHTED" jdbcType="VARCHAR" property="ROEWEIGHTED" />
+    <result column="A32" jdbcType="VARCHAR" property="a32" />
+    <result column="A19" jdbcType="VARCHAR" property="a19" />
+    <result column="ASSPRORATIO" jdbcType="VARCHAR" property="ASSPRORATIO" />
+    <result column="GROSSASSINRATE" jdbcType="VARCHAR" property="GROSSASSINRATE" />
+    <result column="NetProfitToCurrentAsset" jdbcType="VARCHAR" property="netProfitToCurrentAsset" />
+    <result column="RewardofAsset" jdbcType="VARCHAR" property="rewardofAsset" />
+    <result column="A20" jdbcType="VARCHAR" property="a20" />
+    <result column="ROE" jdbcType="VARCHAR" property="ROE" />
+    <result column="NETPROFITzzl" jdbcType="VARCHAR" property="NETPROFITzzl" />
+    <result column="NPCUT" jdbcType="VARCHAR" property="NPCUT" />
+    <result column="TOTPROFITzzl" jdbcType="VARCHAR" property="TOTPROFITzzl" />
+    <result column="bbd_qyxx_id" jdbcType="VARCHAR" property="bbdQyxxId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, company_name, score, EPSBASICEPSCUT, EPSBASIC, EPSFULLDILUTED, BASICEPS, ROEWEIGHTEDCUT, 
+    DILUTEDEPS, EPSFULLDILUTEDCUT, RETonASS, ROEWEIGHTED, A32, A19, ASSPRORATIO, GROSSASSINRATE, 
+    NetProfitToCurrentAsset, RewardofAsset, A20, ROE, NETPROFITzzl, NPCUT, TOTPROFITzzl, 
+    bbd_qyxx_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from table_sample_letter_default
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryByCompanyName" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from table_sample_letter_default
+    where company_name = #{公司名称}
+  </select>
+    <select id="truncateTable">
+      truncate table table_sample_letter_default
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from table_sample_letter_default
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bbd.csrc.dataparse.domain.TableSampleLetterDefault" useGeneratedKeys="true">
+    insert into table_sample_letter_default (company_name, score, EPSBASICEPSCUT, 
+      EPSBASIC, EPSFULLDILUTED, BASICEPS, 
+      ROEWEIGHTEDCUT, DILUTEDEPS, EPSFULLDILUTEDCUT, 
+      RETonASS, ROEWEIGHTED, A32, 
+      A19, ASSPRORATIO, GROSSASSINRATE, 
+      NetProfitToCurrentAsset, RewardofAsset, 
+      A20, ROE, NETPROFITzzl, 
+      NPCUT, TOTPROFITzzl, bbd_qyxx_id
+      )
+    values (#{公司名称,jdbcType=VARCHAR}, #{分数,jdbcType=VARCHAR}, #{EPSBASICEPSCUT,jdbcType=VARCHAR},
+      #{EPSBASIC,jdbcType=VARCHAR}, #{EPSFULLDILUTED,jdbcType=VARCHAR}, #{BASICEPS,jdbcType=VARCHAR}, 
+      #{ROEWEIGHTEDCUT,jdbcType=VARCHAR}, #{DILUTEDEPS,jdbcType=VARCHAR}, #{EPSFULLDILUTEDCUT,jdbcType=VARCHAR}, 
+      #{RETonASS,jdbcType=VARCHAR}, #{ROEWEIGHTED,jdbcType=VARCHAR}, #{a32,jdbcType=VARCHAR}, 
+      #{a19,jdbcType=VARCHAR}, #{ASSPRORATIO,jdbcType=VARCHAR}, #{GROSSASSINRATE,jdbcType=VARCHAR}, 
+      #{netProfitToCurrentAsset,jdbcType=VARCHAR}, #{rewardofAsset,jdbcType=VARCHAR}, 
+      #{a20,jdbcType=VARCHAR}, #{ROE,jdbcType=VARCHAR}, #{NETPROFITzzl,jdbcType=VARCHAR}, 
+      #{NPCUT,jdbcType=VARCHAR}, #{TOTPROFITzzl,jdbcType=VARCHAR}, #{bbdQyxxId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertBatch" parameterType="list">
+    insert into table_sample_letter_default (company_name, score, EPSBASICEPSCUT,
+    EPSBASIC, EPSFULLDILUTED, BASICEPS,
+    ROEWEIGHTEDCUT, DILUTEDEPS, EPSFULLDILUTEDCUT,
+    RETonASS, ROEWEIGHTED, A32,
+    A19, ASSPRORATIO, GROSSASSINRATE,
+    NetProfitToCurrentAsset, RewardofAsset,
+    A20, ROE, NETPROFITzzl,
+    NPCUT, TOTPROFITzzl, bbd_qyxx_id)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.公司名称,jdbcType=VARCHAR}, #{item.分数,jdbcType=VARCHAR}, #{item.EPSBASICEPSCUT,jdbcType=VARCHAR},
+      #{item.EPSBASIC,jdbcType=VARCHAR}, #{item.EPSFULLDILUTED,jdbcType=VARCHAR}, #{item.BASICEPS,jdbcType=VARCHAR},
+      #{item.ROEWEIGHTEDCUT,jdbcType=VARCHAR}, #{item.DILUTEDEPS,jdbcType=VARCHAR}, #{item.EPSFULLDILUTEDCUT,jdbcType=VARCHAR},
+      #{item.RETonASS,jdbcType=VARCHAR}, #{item.ROEWEIGHTED,jdbcType=VARCHAR}, #{item.a32,jdbcType=VARCHAR},
+      #{item.a19,jdbcType=VARCHAR}, #{item.ASSPRORATIO,jdbcType=VARCHAR}, #{item.GROSSASSINRATE,jdbcType=VARCHAR},
+      #{item.netProfitToCurrentAsset,jdbcType=VARCHAR}, #{item.rewardofAsset,jdbcType=VARCHAR},
+      #{item.a20,jdbcType=VARCHAR}, #{item.ROE,jdbcType=VARCHAR}, #{item.NETPROFITzzl,jdbcType=VARCHAR},
+      #{item.NPCUT,jdbcType=VARCHAR}, #{item.TOTPROFITzzl,jdbcType=VARCHAR}, #{item.bbdQyxxId,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bbd.csrc.dataparse.domain.TableSampleLetterDefault" useGeneratedKeys="true">
+    insert into table_sample_letter_default
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="company_name != null">
+        company_name,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="EPSBASICEPSCUT != null">
+        EPSBASICEPSCUT,
+      </if>
+      <if test="EPSBASIC != null">
+        EPSBASIC,
+      </if>
+      <if test="EPSFULLDILUTED != null">
+        EPSFULLDILUTED,
+      </if>
+      <if test="BASICEPS != null">
+        BASICEPS,
+      </if>
+      <if test="ROEWEIGHTEDCUT != null">
+        ROEWEIGHTEDCUT,
+      </if>
+      <if test="DILUTEDEPS != null">
+        DILUTEDEPS,
+      </if>
+      <if test="EPSFULLDILUTEDCUT != null">
+        EPSFULLDILUTEDCUT,
+      </if>
+      <if test="RETonASS != null">
+        RETonASS,
+      </if>
+      <if test="ROEWEIGHTED != null">
+        ROEWEIGHTED,
+      </if>
+      <if test="a32 != null">
+        A32,
+      </if>
+      <if test="a19 != null">
+        A19,
+      </if>
+      <if test="ASSPRORATIO != null">
+        ASSPRORATIO,
+      </if>
+      <if test="GROSSASSINRATE != null">
+        GROSSASSINRATE,
+      </if>
+      <if test="netProfitToCurrentAsset != null">
+        NetProfitToCurrentAsset,
+      </if>
+      <if test="rewardofAsset != null">
+        RewardofAsset,
+      </if>
+      <if test="a20 != null">
+        A20,
+      </if>
+      <if test="ROE != null">
+        ROE,
+      </if>
+      <if test="NETPROFITzzl != null">
+        NETPROFITzzl,
+      </if>
+      <if test="NPCUT != null">
+        NPCUT,
+      </if>
+      <if test="TOTPROFITzzl != null">
+        TOTPROFITzzl,
+      </if>
+      <if test="bbd_qyxx_id != null">
+        bbd_qyxx_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="company_name != null">
+        #{company_name,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="EPSBASICEPSCUT != null">
+        #{EPSBASICEPSCUT,jdbcType=VARCHAR},
+      </if>
+      <if test="EPSBASIC != null">
+        #{EPSBASIC,jdbcType=VARCHAR},
+      </if>
+      <if test="EPSFULLDILUTED != null">
+        #{EPSFULLDILUTED,jdbcType=VARCHAR},
+      </if>
+      <if test="BASICEPS != null">
+        #{BASICEPS,jdbcType=VARCHAR},
+      </if>
+      <if test="ROEWEIGHTEDCUT != null">
+        #{ROEWEIGHTEDCUT,jdbcType=VARCHAR},
+      </if>
+      <if test="DILUTEDEPS != null">
+        #{DILUTEDEPS,jdbcType=VARCHAR},
+      </if>
+      <if test="EPSFULLDILUTEDCUT != null">
+        #{EPSFULLDILUTEDCUT,jdbcType=VARCHAR},
+      </if>
+      <if test="RETonASS != null">
+        #{RETonASS,jdbcType=VARCHAR},
+      </if>
+      <if test="ROEWEIGHTED != null">
+        #{ROEWEIGHTED,jdbcType=VARCHAR},
+      </if>
+      <if test="a32 != null">
+        #{a32,jdbcType=VARCHAR},
+      </if>
+      <if test="a19 != null">
+        #{a19,jdbcType=VARCHAR},
+      </if>
+      <if test="ASSPRORATIO != null">
+        #{ASSPRORATIO,jdbcType=VARCHAR},
+      </if>
+      <if test="GROSSASSINRATE != null">
+        #{GROSSASSINRATE,jdbcType=VARCHAR},
+      </if>
+      <if test="netProfitToCurrentAsset != null">
+        #{netProfitToCurrentAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardofAsset != null">
+        #{rewardofAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="a20 != null">
+        #{a20,jdbcType=VARCHAR},
+      </if>
+      <if test="ROE != null">
+        #{ROE,jdbcType=VARCHAR},
+      </if>
+      <if test="NETPROFITzzl != null">
+        #{NETPROFITzzl,jdbcType=VARCHAR},
+      </if>
+      <if test="NPCUT != null">
+        #{NPCUT,jdbcType=VARCHAR},
+      </if>
+      <if test="TOTPROFITzzl != null">
+        #{TOTPROFITzzl,jdbcType=VARCHAR},
+      </if>
+      <if test="bbd_qyxx_id != null">
+        #{bbd_qyxx_id,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bbd.csrc.dataparse.domain.TableSampleLetterDefault">
+    update table_sample_letter_default
+    <set>
+      <if test="company_name != null">
+        company_name = #{company_name,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="EPSBASICEPSCUT != null">
+        EPSBASICEPSCUT = #{EPSBASICEPSCUT,jdbcType=VARCHAR},
+      </if>
+      <if test="EPSBASIC != null">
+        EPSBASIC = #{EPSBASIC,jdbcType=VARCHAR},
+      </if>
+      <if test="EPSFULLDILUTED != null">
+        EPSFULLDILUTED = #{EPSFULLDILUTED,jdbcType=VARCHAR},
+      </if>
+      <if test="BASICEPS != null">
+        BASICEPS = #{BASICEPS,jdbcType=VARCHAR},
+      </if>
+      <if test="ROEWEIGHTEDCUT != null">
+        ROEWEIGHTEDCUT = #{ROEWEIGHTEDCUT,jdbcType=VARCHAR},
+      </if>
+      <if test="DILUTEDEPS != null">
+        DILUTEDEPS = #{DILUTEDEPS,jdbcType=VARCHAR},
+      </if>
+      <if test="EPSFULLDILUTEDCUT != null">
+        EPSFULLDILUTEDCUT = #{EPSFULLDILUTEDCUT,jdbcType=VARCHAR},
+      </if>
+      <if test="RETonASS != null">
+        RETonASS = #{RETonASS,jdbcType=VARCHAR},
+      </if>
+      <if test="ROEWEIGHTED != null">
+        ROEWEIGHTED = #{ROEWEIGHTED,jdbcType=VARCHAR},
+      </if>
+      <if test="a32 != null">
+        A32 = #{a32,jdbcType=VARCHAR},
+      </if>
+      <if test="a19 != null">
+        A19 = #{a19,jdbcType=VARCHAR},
+      </if>
+      <if test="ASSPRORATIO != null">
+        ASSPRORATIO = #{ASSPRORATIO,jdbcType=VARCHAR},
+      </if>
+      <if test="GROSSASSINRATE != null">
+        GROSSASSINRATE = #{GROSSASSINRATE,jdbcType=VARCHAR},
+      </if>
+      <if test="netProfitToCurrentAsset != null">
+        NetProfitToCurrentAsset = #{netProfitToCurrentAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardofAsset != null">
+        RewardofAsset = #{rewardofAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="a20 != null">
+        A20 = #{a20,jdbcType=VARCHAR},
+      </if>
+      <if test="ROE != null">
+        ROE = #{ROE,jdbcType=VARCHAR},
+      </if>
+      <if test="NETPROFITzzl != null">
+        NETPROFITzzl = #{NETPROFITzzl,jdbcType=VARCHAR},
+      </if>
+      <if test="NPCUT != null">
+        NPCUT = #{NPCUT,jdbcType=VARCHAR},
+      </if>
+      <if test="TOTPROFITzzl != null">
+        TOTPROFITzzl = #{TOTPROFITzzl,jdbcType=VARCHAR},
+      </if>
+      <if test="bbd_qyxx_id != null">
+        bbd_qyxx_id = #{bbd_qyxx_id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bbd.csrc.dataparse.domain.TableSampleLetterDefault">
+    update table_sample_letter_default
+    set company_name = #{company_name,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      EPSBASICEPSCUT = #{EPSBASICEPSCUT,jdbcType=VARCHAR},
+      EPSBASIC = #{EPSBASIC,jdbcType=VARCHAR},
+      EPSFULLDILUTED = #{EPSFULLDILUTED,jdbcType=VARCHAR},
+      BASICEPS = #{BASICEPS,jdbcType=VARCHAR},
+      ROEWEIGHTEDCUT = #{ROEWEIGHTEDCUT,jdbcType=VARCHAR},
+      DILUTEDEPS = #{DILUTEDEPS,jdbcType=VARCHAR},
+      EPSFULLDILUTEDCUT = #{EPSFULLDILUTEDCUT,jdbcType=VARCHAR},
+      RETonASS = #{RETonASS,jdbcType=VARCHAR},
+      ROEWEIGHTED = #{ROEWEIGHTED,jdbcType=VARCHAR},
+      A32 = #{a32,jdbcType=VARCHAR},
+      A19 = #{a19,jdbcType=VARCHAR},
+      ASSPRORATIO = #{ASSPRORATIO,jdbcType=VARCHAR},
+      GROSSASSINRATE = #{GROSSASSINRATE,jdbcType=VARCHAR},
+      NetProfitToCurrentAsset = #{netProfitToCurrentAsset,jdbcType=VARCHAR},
+      RewardofAsset = #{rewardofAsset,jdbcType=VARCHAR},
+      A20 = #{a20,jdbcType=VARCHAR},
+      ROE = #{ROE,jdbcType=VARCHAR},
+      NETPROFITzzl = #{NETPROFITzzl,jdbcType=VARCHAR},
+      NPCUT = #{NPCUT,jdbcType=VARCHAR},
+      TOTPROFITzzl = #{TOTPROFITzzl,jdbcType=VARCHAR},
+      bbd_qyxx_id = #{bbd_qyxx_id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByCompanyName" parameterType="com.bbd.csrc.dataparse.domain.TableSampleLetterDefault">
+    update table_sample_letter_default
+    set
+      score = #{分数,jdbcType=VARCHAR},
+      EPSBASICEPSCUT = #{EPSBASICEPSCUT,jdbcType=VARCHAR},
+      EPSBASIC = #{EPSBASIC,jdbcType=VARCHAR},
+      EPSFULLDILUTED = #{EPSFULLDILUTED,jdbcType=VARCHAR},
+      BASICEPS = #{BASICEPS,jdbcType=VARCHAR},
+      ROEWEIGHTEDCUT = #{ROEWEIGHTEDCUT,jdbcType=VARCHAR},
+      DILUTEDEPS = #{DILUTEDEPS,jdbcType=VARCHAR},
+      EPSFULLDILUTEDCUT = #{EPSFULLDILUTEDCUT,jdbcType=VARCHAR},
+      RETonASS = #{RETonASS,jdbcType=VARCHAR},
+      ROEWEIGHTED = #{ROEWEIGHTED,jdbcType=VARCHAR},
+      A32 = #{a32,jdbcType=VARCHAR},
+      A19 = #{a19,jdbcType=VARCHAR},
+      ASSPRORATIO = #{ASSPRORATIO,jdbcType=VARCHAR},
+      GROSSASSINRATE = #{GROSSASSINRATE,jdbcType=VARCHAR},
+      NetProfitToCurrentAsset = #{netProfitToCurrentAsset,jdbcType=VARCHAR},
+      RewardofAsset = #{rewardofAsset,jdbcType=VARCHAR},
+      A20 = #{a20,jdbcType=VARCHAR},
+      ROE = #{ROE,jdbcType=VARCHAR},
+      NETPROFITzzl = #{NETPROFITzzl,jdbcType=VARCHAR},
+      NPCUT = #{NPCUT,jdbcType=VARCHAR},
+      TOTPROFITzzl = #{TOTPROFITzzl,jdbcType=VARCHAR},
+      bbd_qyxx_id = #{bbdQyxxId,jdbcType=VARCHAR}
+    where company_name = #{公司名称,jdbcType=VARCHAR}
+  </update>
+</mapper>

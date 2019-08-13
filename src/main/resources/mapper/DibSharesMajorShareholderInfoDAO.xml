@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbd.csrc.dataparse.dao.DibSharesMajorShareholderInfoDAO">
+    <resultMap id="BaseResultMap" type="com.bbd.csrc.dataparse.domain.DibSharesMajorShareholderInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="cninfo_id" jdbcType="VARCHAR" property="cninfoId"/>
+        <result column="cninfo_year" jdbcType="VARCHAR" property="cninfoYear"/>
+        <result column="sec_code" jdbcType="VARCHAR" property="secCode"/>
+        <result column="shareh_name" jdbcType="VARCHAR" property="sharehName"/>
+        <result column="share_nature" jdbcType="VARCHAR" property="shareNature"/>
+        <result column="share_perce" jdbcType="DECIMAL" property="sharePerce"/>
+        <result column="shares_held" jdbcType="DECIMAL" property="sharesHeld"/>
+        <result column="increase_decrease" jdbcType="VARCHAR" property="increaseDecrease"/>
+        <result column="num_restricted" jdbcType="DECIMAL" property="numRestricted"/>
+        <result column="num_non_restricted" jdbcType="DECIMAL" property="numNonRestricted"/>
+        <result column="pledged_frozen_shares" jdbcType="VARCHAR" property="pledgedFrozenShares"/>
+        <result column="pledged_frozen_shares_nums" jdbcType="DECIMAL" property="pledgedFrozenSharesNums"/>
+        <result column="related_parties_states" jdbcType="INTEGER" property="relatedPartiesStates"/>
+        <result column="unit" jdbcType="VARCHAR" property="unit"/>
+        <result column="tem_cninfo_id" jdbcType="VARCHAR" property="temCninfoId"/>
+        <result column="add_by" jdbcType="VARCHAR" property="addBy"/>
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_state" jdbcType="VARCHAR" property="updateState"/>
+        <result column="finish_by" jdbcType="VARCHAR" property="finishBy"/>
+        <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime"/>
+        <result column="finish_state" jdbcType="VARCHAR" property="finishState"/>
+        <result column="audit_by" jdbcType="VARCHAR" property="auditBy"/>
+        <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime"/>
+        <result column="retrial_by" jdbcType="VARCHAR" property="retrialBy"/>
+        <result column="retrial_time" jdbcType="TIMESTAMP" property="retrialTime"/>
+        <result column="audit_state" jdbcType="VARCHAR" property="auditState"/>
+        <result column="del_state" jdbcType="INTEGER" property="delState"/>
+        <result column="rank" jdbcType="INTEGER" property="rank"/>
+        <result column="report_date_type" jdbcType="CHAR" property="reportDateType"/>
+        <result column="report_date" jdbcType="DATE" property="reportDate"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="com.bbd.csrc.dataparse.domain.DibSharesMajorShareholderInfoWithBLOBs">
+        <result column="related_parties_change" jdbcType="LONGVARCHAR" property="relatedPartiesChange"/>
+        <result column="strategic_investors" jdbcType="LONGVARCHAR" property="strategicInvestors"/>
+        <result column="related_parties" jdbcType="LONGVARCHAR" property="relatedParties"/>
+        <result column="remark" jdbcType="LONGVARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, cninfo_id, cninfo_year, sec_code, shareh_name, share_nature, share_perce, shares_held, 
+    increase_decrease, num_restricted, num_non_restricted, pledged_frozen_shares, pledged_frozen_shares_nums, 
+    related_parties_states, unit, tem_cninfo_id, add_by, add_time, update_by, update_time, 
+    update_state, finish_by, finish_time, finish_state, audit_by, audit_time, retrial_by, 
+    retrial_time, audit_state, del_state, `rank`, report_date_type, report_date
+  </sql>
+    <sql id="Blob_Column_List">
+    related_parties_change, strategic_investors, related_parties, remark
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dib_shares_major_shareholder_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectBySecCode" resultType="com.bbd.csrc.dataparse.domain.DibSharesMajorShareholderInfo">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dib_shares_major_shareholder_info
+        <where>
+            <if test="secCode">
+                and sec_code = #{secCode}
+            </if>
+            <if test="reportDate != null">
+                and report_date = #{reportDate}
+            </if>
+        </where>
+    </select>
+    <select id="selectSecCodeGroupBySecCode" resultType="java.lang.String">
+      select sec_code from dib_shares_major_shareholder_info
+      where report_date = #{reportDate}
+      GROUP BY sec_code
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dib_shares_major_shareholder_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.DibSharesMajorShareholderInfoWithBLOBs"
+            useGeneratedKeys="true">
+    insert into dib_shares_major_shareholder_info (cninfo_id, cninfo_year, sec_code, 
+      shareh_name, share_nature, share_perce, 
+      shares_held, increase_decrease, num_restricted, 
+      num_non_restricted, pledged_frozen_shares, 
+      pledged_frozen_shares_nums, related_parties_states, 
+      unit, tem_cninfo_id, add_by, 
+      add_time, update_by, update_time, 
+      update_state, finish_by, finish_time, 
+      finish_state, audit_by, audit_time, 
+      retrial_by, retrial_time, audit_state, 
+      del_state, `rank`, report_date_type, 
+      report_date, related_parties_change, strategic_investors, 
+      related_parties, remark)
+    values (#{cninfoId,jdbcType=VARCHAR}, #{cninfoYear,jdbcType=VARCHAR}, #{secCode,jdbcType=VARCHAR}, 
+      #{sharehName,jdbcType=VARCHAR}, #{shareNature,jdbcType=VARCHAR}, #{sharePerce,jdbcType=DECIMAL}, 
+      #{sharesHeld,jdbcType=DECIMAL}, #{increaseDecrease,jdbcType=VARCHAR}, #{numRestricted,jdbcType=DECIMAL}, 
+      #{numNonRestricted,jdbcType=DECIMAL}, #{pledgedFrozenShares,jdbcType=VARCHAR}, 
+      #{pledgedFrozenSharesNums,jdbcType=DECIMAL}, #{relatedPartiesStates,jdbcType=INTEGER}, 
+      #{unit,jdbcType=VARCHAR}, #{temCninfoId,jdbcType=VARCHAR}, #{addBy,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateState,jdbcType=VARCHAR}, #{finishBy,jdbcType=VARCHAR}, #{finishTime,jdbcType=TIMESTAMP}, 
+      #{finishState,jdbcType=VARCHAR}, #{auditBy,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, 
+      #{retrialBy,jdbcType=VARCHAR}, #{retrialTime,jdbcType=TIMESTAMP}, #{auditState,jdbcType=VARCHAR}, 
+      #{delState,jdbcType=INTEGER}, #{rank,jdbcType=INTEGER}, #{reportDateType,jdbcType=CHAR}, 
+      #{reportDate,jdbcType=DATE}, #{relatedPartiesChange,jdbcType=LONGVARCHAR}, #{strategicInvestors,jdbcType=LONGVARCHAR}, 
+      #{relatedParties,jdbcType=LONGVARCHAR}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.DibSharesMajorShareholderInfoWithBLOBs"
+            useGeneratedKeys="true">
+        insert into dib_shares_major_shareholder_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cninfoId != null">
+                cninfo_id,
+            </if>
+            <if test="cninfoYear != null">
+                cninfo_year,
+            </if>
+            <if test="secCode != null">
+                sec_code,
+            </if>
+            <if test="sharehName != null">
+                shareh_name,
+            </if>
+            <if test="shareNature != null">
+                share_nature,
+            </if>
+            <if test="sharePerce != null">
+                share_perce,
+            </if>
+            <if test="sharesHeld != null">
+                shares_held,
+            </if>
+            <if test="increaseDecrease != null">
+                increase_decrease,
+            </if>
+            <if test="numRestricted != null">
+                num_restricted,
+            </if>
+            <if test="numNonRestricted != null">
+                num_non_restricted,
+            </if>
+            <if test="pledgedFrozenShares != null">
+                pledged_frozen_shares,
+            </if>
+            <if test="pledgedFrozenSharesNums != null">
+                pledged_frozen_shares_nums,
+            </if>
+            <if test="relatedPartiesStates != null">
+                related_parties_states,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="temCninfoId != null">
+                tem_cninfo_id,
+            </if>
+            <if test="addBy != null">
+                add_by,
+            </if>
+            <if test="addTime != null">
+                add_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateState != null">
+                update_state,
+            </if>
+            <if test="finishBy != null">
+                finish_by,
+            </if>
+            <if test="finishTime != null">
+                finish_time,
+            </if>
+            <if test="finishState != null">
+                finish_state,
+            </if>
+            <if test="auditBy != null">
+                audit_by,
+            </if>
+            <if test="auditTime != null">
+                audit_time,
+            </if>
+            <if test="retrialBy != null">
+                retrial_by,
+            </if>
+            <if test="retrialTime != null">
+                retrial_time,
+            </if>
+            <if test="auditState != null">
+                audit_state,
+            </if>
+            <if test="delState != null">
+                del_state,
+            </if>
+            <if test="rank != null">
+                `rank`,
+            </if>
+            <if test="reportDateType != null">
+                report_date_type,
+            </if>
+            <if test="reportDate != null">
+                report_date,
+            </if>
+            <if test="relatedPartiesChange != null">
+                related_parties_change,
+            </if>
+            <if test="strategicInvestors != null">
+                strategic_investors,
+            </if>
+            <if test="relatedParties != null">
+                related_parties,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cninfoId != null">
+                #{cninfoId,jdbcType=VARCHAR},
+            </if>
+            <if test="cninfoYear != null">
+                #{cninfoYear,jdbcType=VARCHAR},
+            </if>
+            <if test="secCode != null">
+                #{secCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sharehName != null">
+                #{sharehName,jdbcType=VARCHAR},
+            </if>
+            <if test="shareNature != null">
+                #{shareNature,jdbcType=VARCHAR},
+            </if>
+            <if test="sharePerce != null">
+                #{sharePerce,jdbcType=DECIMAL},
+            </if>
+            <if test="sharesHeld != null">
+                #{sharesHeld,jdbcType=DECIMAL},
+            </if>
+            <if test="increaseDecrease != null">
+                #{increaseDecrease,jdbcType=VARCHAR},
+            </if>
+            <if test="numRestricted != null">
+                #{numRestricted,jdbcType=DECIMAL},
+            </if>
+            <if test="numNonRestricted != null">
+                #{numNonRestricted,jdbcType=DECIMAL},
+            </if>
+            <if test="pledgedFrozenShares != null">
+                #{pledgedFrozenShares,jdbcType=VARCHAR},
+            </if>
+            <if test="pledgedFrozenSharesNums != null">
+                #{pledgedFrozenSharesNums,jdbcType=DECIMAL},
+            </if>
+            <if test="relatedPartiesStates != null">
+                #{relatedPartiesStates,jdbcType=INTEGER},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="temCninfoId != null">
+                #{temCninfoId,jdbcType=VARCHAR},
+            </if>
+            <if test="addBy != null">
+                #{addBy,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateState != null">
+                #{updateState,jdbcType=VARCHAR},
+            </if>
+            <if test="finishBy != null">
+                #{finishBy,jdbcType=VARCHAR},
+            </if>
+            <if test="finishTime != null">
+                #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishState != null">
+                #{finishState,jdbcType=VARCHAR},
+            </if>
+            <if test="auditBy != null">
+                #{auditBy,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null">
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="retrialBy != null">
+                #{retrialBy,jdbcType=VARCHAR},
+            </if>
+            <if test="retrialTime != null">
+                #{retrialTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditState != null">
+                #{auditState,jdbcType=VARCHAR},
+            </if>
+            <if test="delState != null">
+                #{delState,jdbcType=INTEGER},
+            </if>
+            <if test="rank != null">
+                #{rank,jdbcType=INTEGER},
+            </if>
+            <if test="reportDateType != null">
+                #{reportDateType,jdbcType=CHAR},
+            </if>
+            <if test="reportDate != null">
+                #{reportDate,jdbcType=DATE},
+            </if>
+            <if test="relatedPartiesChange != null">
+                #{relatedPartiesChange,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="strategicInvestors != null">
+                #{strategicInvestors,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="relatedParties != null">
+                #{relatedParties,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.bbd.csrc.dataparse.domain.DibSharesMajorShareholderInfoWithBLOBs">
+        update dib_shares_major_shareholder_info
+        <set>
+            <if test="cninfoId != null">
+                cninfo_id = #{cninfoId,jdbcType=VARCHAR},
+            </if>
+            <if test="cninfoYear != null">
+                cninfo_year = #{cninfoYear,jdbcType=VARCHAR},
+            </if>
+            <if test="secCode != null">
+                sec_code = #{secCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sharehName != null">
+                shareh_name = #{sharehName,jdbcType=VARCHAR},
+            </if>
+            <if test="shareNature != null">
+                share_nature = #{shareNature,jdbcType=VARCHAR},
+            </if>
+            <if test="sharePerce != null">
+                share_perce = #{sharePerce,jdbcType=DECIMAL},
+            </if>
+            <if test="sharesHeld != null">
+                shares_held = #{sharesHeld,jdbcType=DECIMAL},
+            </if>
+            <if test="increaseDecrease != null">
+                increase_decrease = #{increaseDecrease,jdbcType=VARCHAR},
+            </if>
+            <if test="numRestricted != null">
+                num_restricted = #{numRestricted,jdbcType=DECIMAL},
+            </if>
+            <if test="numNonRestricted != null">
+                num_non_restricted = #{numNonRestricted,jdbcType=DECIMAL},
+            </if>
+            <if test="pledgedFrozenShares != null">
+                pledged_frozen_shares = #{pledgedFrozenShares,jdbcType=VARCHAR},
+            </if>
+            <if test="pledgedFrozenSharesNums != null">
+                pledged_frozen_shares_nums = #{pledgedFrozenSharesNums,jdbcType=DECIMAL},
+            </if>
+            <if test="relatedPartiesStates != null">
+                related_parties_states = #{relatedPartiesStates,jdbcType=INTEGER},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="temCninfoId != null">
+                tem_cninfo_id = #{temCninfoId,jdbcType=VARCHAR},
+            </if>
+            <if test="addBy != null">
+                add_by = #{addBy,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateState != null">
+                update_state = #{updateState,jdbcType=VARCHAR},
+            </if>
+            <if test="finishBy != null">
+                finish_by = #{finishBy,jdbcType=VARCHAR},
+            </if>
+            <if test="finishTime != null">
+                finish_time = #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishState != null">
+                finish_state = #{finishState,jdbcType=VARCHAR},
+            </if>
+            <if test="auditBy != null">
+                audit_by = #{auditBy,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null">
+                audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="retrialBy != null">
+                retrial_by = #{retrialBy,jdbcType=VARCHAR},
+            </if>
+            <if test="retrialTime != null">
+                retrial_time = #{retrialTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditState != null">
+                audit_state = #{auditState,jdbcType=VARCHAR},
+            </if>
+            <if test="delState != null">
+                del_state = #{delState,jdbcType=INTEGER},
+            </if>
+            <if test="rank != null">
+                `rank` = #{rank,jdbcType=INTEGER},
+            </if>
+            <if test="reportDateType != null">
+                report_date_type = #{reportDateType,jdbcType=CHAR},
+            </if>
+            <if test="reportDate != null">
+                report_date = #{reportDate,jdbcType=DATE},
+            </if>
+            <if test="relatedPartiesChange != null">
+                related_parties_change = #{relatedPartiesChange,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="strategicInvestors != null">
+                strategic_investors = #{strategicInvestors,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="relatedParties != null">
+                related_parties = #{relatedParties,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs"
+            parameterType="com.bbd.csrc.dataparse.domain.DibSharesMajorShareholderInfoWithBLOBs">
+    update dib_shares_major_shareholder_info
+    set cninfo_id = #{cninfoId,jdbcType=VARCHAR},
+      cninfo_year = #{cninfoYear,jdbcType=VARCHAR},
+      sec_code = #{secCode,jdbcType=VARCHAR},
+      shareh_name = #{sharehName,jdbcType=VARCHAR},
+      share_nature = #{shareNature,jdbcType=VARCHAR},
+      share_perce = #{sharePerce,jdbcType=DECIMAL},
+      shares_held = #{sharesHeld,jdbcType=DECIMAL},
+      increase_decrease = #{increaseDecrease,jdbcType=VARCHAR},
+      num_restricted = #{numRestricted,jdbcType=DECIMAL},
+      num_non_restricted = #{numNonRestricted,jdbcType=DECIMAL},
+      pledged_frozen_shares = #{pledgedFrozenShares,jdbcType=VARCHAR},
+      pledged_frozen_shares_nums = #{pledgedFrozenSharesNums,jdbcType=DECIMAL},
+      related_parties_states = #{relatedPartiesStates,jdbcType=INTEGER},
+      unit = #{unit,jdbcType=VARCHAR},
+      tem_cninfo_id = #{temCninfoId,jdbcType=VARCHAR},
+      add_by = #{addBy,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_state = #{updateState,jdbcType=VARCHAR},
+      finish_by = #{finishBy,jdbcType=VARCHAR},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      finish_state = #{finishState,jdbcType=VARCHAR},
+      audit_by = #{auditBy,jdbcType=VARCHAR},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      retrial_by = #{retrialBy,jdbcType=VARCHAR},
+      retrial_time = #{retrialTime,jdbcType=TIMESTAMP},
+      audit_state = #{auditState,jdbcType=VARCHAR},
+      del_state = #{delState,jdbcType=INTEGER},
+      `rank` = #{rank,jdbcType=INTEGER},
+      report_date_type = #{reportDateType,jdbcType=CHAR},
+      report_date = #{reportDate,jdbcType=DATE},
+      related_parties_change = #{relatedPartiesChange,jdbcType=LONGVARCHAR},
+      strategic_investors = #{strategicInvestors,jdbcType=LONGVARCHAR},
+      related_parties = #{relatedParties,jdbcType=LONGVARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.bbd.csrc.dataparse.domain.DibSharesMajorShareholderInfo">
+    update dib_shares_major_shareholder_info
+    set cninfo_id = #{cninfoId,jdbcType=VARCHAR},
+      cninfo_year = #{cninfoYear,jdbcType=VARCHAR},
+      sec_code = #{secCode,jdbcType=VARCHAR},
+      shareh_name = #{sharehName,jdbcType=VARCHAR},
+      share_nature = #{shareNature,jdbcType=VARCHAR},
+      share_perce = #{sharePerce,jdbcType=DECIMAL},
+      shares_held = #{sharesHeld,jdbcType=DECIMAL},
+      increase_decrease = #{increaseDecrease,jdbcType=VARCHAR},
+      num_restricted = #{numRestricted,jdbcType=DECIMAL},
+      num_non_restricted = #{numNonRestricted,jdbcType=DECIMAL},
+      pledged_frozen_shares = #{pledgedFrozenShares,jdbcType=VARCHAR},
+      pledged_frozen_shares_nums = #{pledgedFrozenSharesNums,jdbcType=DECIMAL},
+      related_parties_states = #{relatedPartiesStates,jdbcType=INTEGER},
+      unit = #{unit,jdbcType=VARCHAR},
+      tem_cninfo_id = #{temCninfoId,jdbcType=VARCHAR},
+      add_by = #{addBy,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_state = #{updateState,jdbcType=VARCHAR},
+      finish_by = #{finishBy,jdbcType=VARCHAR},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      finish_state = #{finishState,jdbcType=VARCHAR},
+      audit_by = #{auditBy,jdbcType=VARCHAR},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      retrial_by = #{retrialBy,jdbcType=VARCHAR},
+      retrial_time = #{retrialTime,jdbcType=TIMESTAMP},
+      audit_state = #{auditState,jdbcType=VARCHAR},
+      del_state = #{delState,jdbcType=INTEGER},
+      `rank` = #{rank,jdbcType=INTEGER},
+      report_date_type = #{reportDateType,jdbcType=CHAR},
+      report_date = #{reportDate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

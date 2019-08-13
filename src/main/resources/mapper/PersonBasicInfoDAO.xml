@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbd.csrc.dataparse.dao.PersonBasicInfoDAO">
+    <resultMap id="BaseResultMap" type="com.bbd.csrc.dataparse.domain.PersonBasicInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sec_code" jdbcType="VARCHAR" property="sec_code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="age" jdbcType="VARCHAR" property="age"/>
+        <result column="education" jdbcType="VARCHAR" property="education"/>
+        <result column="position" jdbcType="VARCHAR" property="position"/>
+        <result column="ratio" jdbcType="VARCHAR" property="ratio"/>
+        <result column="nationality" jdbcType="VARCHAR" property="nationality"/>
+        <result column="report_date" jdbcType="VARCHAR" property="report_date"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, sec_code, `name`, `type`, sex, age, education, `position`, ratio, nationality, 
+    report_date, resume
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from person_basic_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="truncateTable">
+    truncate table person_basic_info
+  </select>
+    <select id="selectBySecCodeAndName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from person_basic_info
+        where sec_code = #{secCode,jdbcType=VARCHAR} and
+        `name` = #{name,jdbcType=VARCHAR}
+        limit 1
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from person_basic_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bbd.csrc.dataparse.domain.PersonBasicInfo"
+            useGeneratedKeys="true">
+    insert into person_basic_info (sec_code, `name`, `type`,
+      sex, age, education, 
+      `position`, ratio, nationality,
+      report_date, resume)
+    values (#{sec_code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR},
+      #{position,jdbcType=VARCHAR}, #{ratio,jdbcType=VARCHAR}, #{nationality,jdbcType=VARCHAR}, 
+      #{report_date,jdbcType=VARCHAR},#{resume,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertBatch" parameterType="list">
+        replace into person_basic_info (sec_code, `name`, `type`,
+        sex, age, education,
+        `position`, ratio, nationality,
+        report_date)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.sec_code,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.type,jdbcType=VARCHAR},
+            #{item.sex,jdbcType=VARCHAR}, #{item.age,jdbcType=VARCHAR}, #{item.education,jdbcType=VARCHAR},
+            #{item.position,jdbcType=VARCHAR}, #{item.ratio,jdbcType=VARCHAR}, #{item.nationality,jdbcType=VARCHAR},
+            #{item.report_date,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.PersonBasicInfo" useGeneratedKeys="true">
+        insert into person_basic_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sec_code != null">
+                sec_code,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="education != null">
+                education,
+            </if>
+            <if test="position != null">
+                `position`,
+            </if>
+            <if test="ratio != null">
+                ratio,
+            </if>
+            <if test="nationality != null">
+                nationality,
+            </if>
+            <if test="report_date != null">
+                report_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sec_code != null">
+                #{sec_code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="ratio != null">
+                #{ratio,jdbcType=VARCHAR},
+            </if>
+            <if test="nationality != null">
+                #{nationality,jdbcType=VARCHAR},
+            </if>
+            <if test="report_date != null">
+                #{report_date,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bbd.csrc.dataparse.domain.PersonBasicInfo">
+        update person_basic_info
+        <set>
+            <if test="sec_code != null">
+                sec_code = #{sec_code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                education = #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                `position` = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="ratio != null">
+                ratio = #{ratio,jdbcType=VARCHAR},
+            </if>
+            <if test="nationality != null">
+                nationality = #{nationality,jdbcType=VARCHAR},
+            </if>
+            <if test="report_date != null">
+                report_date = #{report_date,jdbcType=VARCHAR},
+            </if>
+            <if test="resume != null">
+                resume = #{resume,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bbd.csrc.dataparse.domain.PersonBasicInfo">
+    update person_basic_info
+    set sec_code = #{sec_code,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      `position` = #{position,jdbcType=VARCHAR},
+      ratio = #{ratio,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      report_date = #{report_date,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateBySecCodeAndName">
+        update person_basic_info
+        <set>
+            <if test="type != null">
+                `type` = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                education = #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                `position` = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="ratio != null">
+                ratio = #{ratio,jdbcType=VARCHAR},
+            </if>
+            <if test="nationality != null">
+                nationality = #{nationality,jdbcType=VARCHAR},
+            </if>
+            <if test="report_date != null">
+                report_date = #{report_date,jdbcType=VARCHAR},
+            </if>
+            <if test="resume != null">
+                resume = #{resume,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where sec_code = #{sec_code,jdbcType=VARCHAR}
+        and `name` = #{name,jdbcType=VARCHAR}
+    </update>
+</mapper>

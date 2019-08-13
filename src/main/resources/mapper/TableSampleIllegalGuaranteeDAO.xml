@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbd.csrc.dataparse.dao.TableSampleIllegalGuaranteeDAO">
+    <resultMap id="BaseResultMap" type="com.bbd.csrc.dataparse.domain.TableSampleIllegalGuarantee">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="company_name" jdbcType="VARCHAR" property="公司名称"/>
+        <result column="score" jdbcType="VARCHAR" property="分数"/>
+        <result column="PARESHARRIGH" jdbcType="VARCHAR" property="PARESHARRIGH"/>
+        <result column="NONOREVE" jdbcType="VARCHAR" property="NONOREVE"/>
+        <result column="PAYTAX" jdbcType="VARCHAR" property="PAYTAX"/>
+        <result column="ACCOPAYA" jdbcType="VARCHAR" property="ACCOPAYA"/>
+        <result column="RIGHAGGR" jdbcType="VARCHAR" property="RIGHAGGR"/>
+        <result column="ACQUASSETCASH" jdbcType="VARCHAR" property="ACQUASSETCASH"/>
+        <result column="INCOTAXEXPE" jdbcType="VARCHAR" property="INCOTAXEXPE"/>
+        <result column="EPSFULLDILUTED" jdbcType="VARCHAR" property="EPSFULLDILUTED"/>
+        <result column="DILUTEDEPS" jdbcType="VARCHAR" property="DILUTEDEPS"/>
+        <result column="EPSBASIC" jdbcType="VARCHAR" property="EPSBASIC"/>
+        <result column="TOTALCURRLIAB" jdbcType="VARCHAR" property="TOTALCURRLIAB"/>
+        <result column="BASICEPS" jdbcType="VARCHAR" property="BASICEPS"/>
+        <result column="INVEREDU" jdbcType="VARCHAR" property="INVEREDU"/>
+        <result column="ADVAPAYM" jdbcType="VARCHAR" property="ADVAPAYM"/>
+        <result column="BIZTAX" jdbcType="VARCHAR" property="BIZTAX"/>
+        <result column="PAYAINCR" jdbcType="VARCHAR" property="PAYAINCR"/>
+        <result column="EequityTurnovertrend" jdbcType="VARCHAR" property="eequityTurnovertrend"/>
+        <result column="OTHERRECE" jdbcType="VARCHAR" property="OTHERRECE"/>
+        <result column="TOTALNONCLIAB" jdbcType="VARCHAR" property="TOTALNONCLIAB"/>
+        <result column="TOTALNONCASSETS" jdbcType="VARCHAR" property="TOTALNONCASSETS"/>
+        <result column="bbd_qyxx_id" jdbcType="VARCHAR" property="bbdQyxxId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, company_name, score, PARESHARRIGH, NONOREVE, PAYTAX, ACCOPAYA, RIGHAGGR, ACQUASSETCASH, 
+    INCOTAXEXPE, EPSFULLDILUTED, DILUTEDEPS, EPSBASIC, TOTALCURRLIAB, BASICEPS, INVEREDU, 
+    ADVAPAYM, BIZTAX, PAYAINCR, EequityTurnovertrend, OTHERRECE, TOTALNONCLIAB, TOTALNONCASSETS, 
+    bbd_qyxx_id
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from table_sample_illegal_guarantee
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="queryByCompanyName" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from table_sample_illegal_guarantee
+        where company_name = #{companyName,jdbcType=VARCHAR}
+    </select>
+    <select id="truncateTable">
+        truncate table table_sample_illegal_guarantee
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from table_sample_illegal_guarantee
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.TableSampleIllegalGuarantee" useGeneratedKeys="true">
+    insert into table_sample_illegal_guarantee (company_name, score, PARESHARRIGH,
+      NONOREVE, PAYTAX, ACCOPAYA, 
+      RIGHAGGR, ACQUASSETCASH, INCOTAXEXPE, 
+      EPSFULLDILUTED, DILUTEDEPS, EPSBASIC, 
+      TOTALCURRLIAB, BASICEPS, INVEREDU, 
+      ADVAPAYM, BIZTAX, PAYAINCR, 
+      EequityTurnovertrend, OTHERRECE, TOTALNONCLIAB, 
+      TOTALNONCASSETS, bbd_qyxx_id)
+    values (#{公司名称,jdbcType=VARCHAR}, #{分数,jdbcType=VARCHAR}, #{PARESHARRIGH,jdbcType=VARCHAR},
+      #{NONOREVE,jdbcType=VARCHAR}, #{PAYTAX,jdbcType=VARCHAR}, #{ACCOPAYA,jdbcType=VARCHAR}, 
+      #{RIGHAGGR,jdbcType=VARCHAR}, #{ACQUASSETCASH,jdbcType=VARCHAR}, #{INCOTAXEXPE,jdbcType=VARCHAR}, 
+      #{EPSFULLDILUTED,jdbcType=VARCHAR}, #{DILUTEDEPS,jdbcType=VARCHAR}, #{EPSBASIC,jdbcType=VARCHAR}, 
+      #{TOTALCURRLIAB,jdbcType=VARCHAR}, #{BASICEPS,jdbcType=VARCHAR}, #{INVEREDU,jdbcType=VARCHAR}, 
+      #{ADVAPAYM,jdbcType=VARCHAR}, #{BIZTAX,jdbcType=VARCHAR}, #{PAYAINCR,jdbcType=VARCHAR}, 
+      #{eequityTurnovertrend,jdbcType=VARCHAR}, #{OTHERRECE,jdbcType=VARCHAR}, #{TOTALNONCLIAB,jdbcType=VARCHAR}, 
+      #{TOTALNONCASSETS,jdbcType=VARCHAR}, #{bbdQyxxId,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertBatch" parameterType="list">
+        insert into table_sample_illegal_guarantee (company_name, score, PARESHARRIGH,
+        NONOREVE, PAYTAX, ACCOPAYA,
+        RIGHAGGR, ACQUASSETCASH, INCOTAXEXPE,
+        EPSFULLDILUTED, DILUTEDEPS, EPSBASIC,
+        TOTALCURRLIAB, BASICEPS, INVEREDU,
+        ADVAPAYM, BIZTAX, PAYAINCR,
+        EequityTurnovertrend, OTHERRECE, TOTALNONCLIAB,
+        TOTALNONCASSETS, bbd_qyxx_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.公司名称,jdbcType=VARCHAR}, #{item.分数,jdbcType=VARCHAR}, #{item.PARESHARRIGH,jdbcType=VARCHAR},
+            #{item.NONOREVE,jdbcType=VARCHAR}, #{item.PAYTAX,jdbcType=VARCHAR}, #{item.ACCOPAYA,jdbcType=VARCHAR},
+            #{item.RIGHAGGR,jdbcType=VARCHAR}, #{item.ACQUASSETCASH,jdbcType=VARCHAR},
+            #{item.INCOTAXEXPE,jdbcType=VARCHAR},
+            #{item.EPSFULLDILUTED,jdbcType=VARCHAR}, #{item.DILUTEDEPS,jdbcType=VARCHAR},
+            #{item.EPSBASIC,jdbcType=VARCHAR},
+            #{item.TOTALCURRLIAB,jdbcType=VARCHAR}, #{item.BASICEPS,jdbcType=VARCHAR},
+            #{item.INVEREDU,jdbcType=VARCHAR},
+            #{item.ADVAPAYM,jdbcType=VARCHAR}, #{item.BIZTAX,jdbcType=VARCHAR}, #{item.PAYAINCR,jdbcType=VARCHAR},
+            #{item.eequityTurnovertrend,jdbcType=VARCHAR}, #{item.OTHERRECE,jdbcType=VARCHAR},
+            #{item.TOTALNONCLIAB,jdbcType=VARCHAR},
+            #{item.TOTALNONCASSETS,jdbcType=VARCHAR}, #{item.bbdQyxxId,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.TableSampleIllegalGuarantee" useGeneratedKeys="true">
+        insert into table_sample_illegal_guarantee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="company_name != null">
+                company_name,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="PARESHARRIGH != null">
+                PARESHARRIGH,
+            </if>
+            <if test="NONOREVE != null">
+                NONOREVE,
+            </if>
+            <if test="PAYTAX != null">
+                PAYTAX,
+            </if>
+            <if test="ACCOPAYA != null">
+                ACCOPAYA,
+            </if>
+            <if test="RIGHAGGR != null">
+                RIGHAGGR,
+            </if>
+            <if test="ACQUASSETCASH != null">
+                ACQUASSETCASH,
+            </if>
+            <if test="INCOTAXEXPE != null">
+                INCOTAXEXPE,
+            </if>
+            <if test="EPSFULLDILUTED != null">
+                EPSFULLDILUTED,
+            </if>
+            <if test="DILUTEDEPS != null">
+                DILUTEDEPS,
+            </if>
+            <if test="EPSBASIC != null">
+                EPSBASIC,
+            </if>
+            <if test="TOTALCURRLIAB != null">
+                TOTALCURRLIAB,
+            </if>
+            <if test="BASICEPS != null">
+                BASICEPS,
+            </if>
+            <if test="INVEREDU != null">
+                INVEREDU,
+            </if>
+            <if test="ADVAPAYM != null">
+                ADVAPAYM,
+            </if>
+            <if test="BIZTAX != null">
+                BIZTAX,
+            </if>
+            <if test="PAYAINCR != null">
+                PAYAINCR,
+            </if>
+            <if test="eequityTurnovertrend != null">
+                EequityTurnovertrend,
+            </if>
+            <if test="OTHERRECE != null">
+                OTHERRECE,
+            </if>
+            <if test="TOTALNONCLIAB != null">
+                TOTALNONCLIAB,
+            </if>
+            <if test="TOTALNONCASSETS != null">
+                TOTALNONCASSETS,
+            </if>
+            <if test="bbd_qyxx_id != null">
+                bbd_qyxx_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="company_name != null">
+                #{company_name,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=VARCHAR},
+            </if>
+            <if test="PARESHARRIGH != null">
+                #{PARESHARRIGH,jdbcType=VARCHAR},
+            </if>
+            <if test="NONOREVE != null">
+                #{NONOREVE,jdbcType=VARCHAR},
+            </if>
+            <if test="PAYTAX != null">
+                #{PAYTAX,jdbcType=VARCHAR},
+            </if>
+            <if test="ACCOPAYA != null">
+                #{ACCOPAYA,jdbcType=VARCHAR},
+            </if>
+            <if test="RIGHAGGR != null">
+                #{RIGHAGGR,jdbcType=VARCHAR},
+            </if>
+            <if test="ACQUASSETCASH != null">
+                #{ACQUASSETCASH,jdbcType=VARCHAR},
+            </if>
+            <if test="INCOTAXEXPE != null">
+                #{INCOTAXEXPE,jdbcType=VARCHAR},
+            </if>
+            <if test="EPSFULLDILUTED != null">
+                #{EPSFULLDILUTED,jdbcType=VARCHAR},
+            </if>
+            <if test="DILUTEDEPS != null">
+                #{DILUTEDEPS,jdbcType=VARCHAR},
+            </if>
+            <if test="EPSBASIC != null">
+                #{EPSBASIC,jdbcType=VARCHAR},
+            </if>
+            <if test="TOTALCURRLIAB != null">
+                #{TOTALCURRLIAB,jdbcType=VARCHAR},
+            </if>
+            <if test="BASICEPS != null">
+                #{BASICEPS,jdbcType=VARCHAR},
+            </if>
+            <if test="INVEREDU != null">
+                #{INVEREDU,jdbcType=VARCHAR},
+            </if>
+            <if test="ADVAPAYM != null">
+                #{ADVAPAYM,jdbcType=VARCHAR},
+            </if>
+            <if test="BIZTAX != null">
+                #{BIZTAX,jdbcType=VARCHAR},
+            </if>
+            <if test="PAYAINCR != null">
+                #{PAYAINCR,jdbcType=VARCHAR},
+            </if>
+            <if test="eequityTurnovertrend != null">
+                #{eequityTurnovertrend,jdbcType=VARCHAR},
+            </if>
+            <if test="OTHERRECE != null">
+                #{OTHERRECE,jdbcType=VARCHAR},
+            </if>
+            <if test="TOTALNONCLIAB != null">
+                #{TOTALNONCLIAB,jdbcType=VARCHAR},
+            </if>
+            <if test="TOTALNONCASSETS != null">
+                #{TOTALNONCASSETS,jdbcType=VARCHAR},
+            </if>
+            <if test="bbd_qyxx_id != null">
+                #{bbd_qyxx_id,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bbd.csrc.dataparse.domain.TableSampleIllegalGuarantee">
+        update table_sample_illegal_guarantee
+        <set>
+            <if test="company_name != null">
+                company_name = #{company_name,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=VARCHAR},
+            </if>
+            <if test="PARESHARRIGH != null">
+                PARESHARRIGH = #{PARESHARRIGH,jdbcType=VARCHAR},
+            </if>
+            <if test="NONOREVE != null">
+                NONOREVE = #{NONOREVE,jdbcType=VARCHAR},
+            </if>
+            <if test="PAYTAX != null">
+                PAYTAX = #{PAYTAX,jdbcType=VARCHAR},
+            </if>
+            <if test="ACCOPAYA != null">
+                ACCOPAYA = #{ACCOPAYA,jdbcType=VARCHAR},
+            </if>
+            <if test="RIGHAGGR != null">
+                RIGHAGGR = #{RIGHAGGR,jdbcType=VARCHAR},
+            </if>
+            <if test="ACQUASSETCASH != null">
+                ACQUASSETCASH = #{ACQUASSETCASH,jdbcType=VARCHAR},
+            </if>
+            <if test="INCOTAXEXPE != null">
+                INCOTAXEXPE = #{INCOTAXEXPE,jdbcType=VARCHAR},
+            </if>
+            <if test="EPSFULLDILUTED != null">
+                EPSFULLDILUTED = #{EPSFULLDILUTED,jdbcType=VARCHAR},
+            </if>
+            <if test="DILUTEDEPS != null">
+                DILUTEDEPS = #{DILUTEDEPS,jdbcType=VARCHAR},
+            </if>
+            <if test="EPSBASIC != null">
+                EPSBASIC = #{EPSBASIC,jdbcType=VARCHAR},
+            </if>
+            <if test="TOTALCURRLIAB != null">
+                TOTALCURRLIAB = #{TOTALCURRLIAB,jdbcType=VARCHAR},
+            </if>
+            <if test="BASICEPS != null">
+                BASICEPS = #{BASICEPS,jdbcType=VARCHAR},
+            </if>
+            <if test="INVEREDU != null">
+                INVEREDU = #{INVEREDU,jdbcType=VARCHAR},
+            </if>
+            <if test="ADVAPAYM != null">
+                ADVAPAYM = #{ADVAPAYM,jdbcType=VARCHAR},
+            </if>
+            <if test="BIZTAX != null">
+                BIZTAX = #{BIZTAX,jdbcType=VARCHAR},
+            </if>
+            <if test="PAYAINCR != null">
+                PAYAINCR = #{PAYAINCR,jdbcType=VARCHAR},
+            </if>
+            <if test="eequityTurnovertrend != null">
+                EequityTurnovertrend = #{eequityTurnovertrend,jdbcType=VARCHAR},
+            </if>
+            <if test="OTHERRECE != null">
+                OTHERRECE = #{OTHERRECE,jdbcType=VARCHAR},
+            </if>
+            <if test="TOTALNONCLIAB != null">
+                TOTALNONCLIAB = #{TOTALNONCLIAB,jdbcType=VARCHAR},
+            </if>
+            <if test="TOTALNONCASSETS != null">
+                TOTALNONCASSETS = #{TOTALNONCASSETS,jdbcType=VARCHAR},
+            </if>
+            <if test="bbd_qyxx_id != null">
+                bbd_qyxx_id = #{bbd_qyxx_id,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bbd.csrc.dataparse.domain.TableSampleIllegalGuarantee">
+    update table_sample_illegal_guarantee
+    set company_name = #{company_name,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      PARESHARRIGH = #{PARESHARRIGH,jdbcType=VARCHAR},
+      NONOREVE = #{NONOREVE,jdbcType=VARCHAR},
+      PAYTAX = #{PAYTAX,jdbcType=VARCHAR},
+      ACCOPAYA = #{ACCOPAYA,jdbcType=VARCHAR},
+      RIGHAGGR = #{RIGHAGGR,jdbcType=VARCHAR},
+      ACQUASSETCASH = #{ACQUASSETCASH,jdbcType=VARCHAR},
+      INCOTAXEXPE = #{INCOTAXEXPE,jdbcType=VARCHAR},
+      EPSFULLDILUTED = #{EPSFULLDILUTED,jdbcType=VARCHAR},
+      DILUTEDEPS = #{DILUTEDEPS,jdbcType=VARCHAR},
+      EPSBASIC = #{EPSBASIC,jdbcType=VARCHAR},
+      TOTALCURRLIAB = #{TOTALCURRLIAB,jdbcType=VARCHAR},
+      BASICEPS = #{BASICEPS,jdbcType=VARCHAR},
+      INVEREDU = #{INVEREDU,jdbcType=VARCHAR},
+      ADVAPAYM = #{ADVAPAYM,jdbcType=VARCHAR},
+      BIZTAX = #{BIZTAX,jdbcType=VARCHAR},
+      PAYAINCR = #{PAYAINCR,jdbcType=VARCHAR},
+      EequityTurnovertrend = #{eequityTurnovertrend,jdbcType=VARCHAR},
+      OTHERRECE = #{OTHERRECE,jdbcType=VARCHAR},
+      TOTALNONCLIAB = #{TOTALNONCLIAB,jdbcType=VARCHAR},
+      TOTALNONCASSETS = #{TOTALNONCASSETS,jdbcType=VARCHAR},
+      bbd_qyxx_id = #{bbd_qyxx_id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByCompanyName" parameterType="com.bbd.csrc.dataparse.domain.TableSampleIllegalGuarantee">
+    update table_sample_illegal_guarantee
+    set
+      score = #{分数,jdbcType=VARCHAR},
+      PARESHARRIGH = #{PARESHARRIGH,jdbcType=VARCHAR},
+      NONOREVE = #{NONOREVE,jdbcType=VARCHAR},
+      PAYTAX = #{PAYTAX,jdbcType=VARCHAR},
+      ACCOPAYA = #{ACCOPAYA,jdbcType=VARCHAR},
+      RIGHAGGR = #{RIGHAGGR,jdbcType=VARCHAR},
+      ACQUASSETCASH = #{ACQUASSETCASH,jdbcType=VARCHAR},
+      INCOTAXEXPE = #{INCOTAXEXPE,jdbcType=VARCHAR},
+      EPSFULLDILUTED = #{EPSFULLDILUTED,jdbcType=VARCHAR},
+      DILUTEDEPS = #{DILUTEDEPS,jdbcType=VARCHAR},
+      EPSBASIC = #{EPSBASIC,jdbcType=VARCHAR},
+      TOTALCURRLIAB = #{TOTALCURRLIAB,jdbcType=VARCHAR},
+      BASICEPS = #{BASICEPS,jdbcType=VARCHAR},
+      INVEREDU = #{INVEREDU,jdbcType=VARCHAR},
+      ADVAPAYM = #{ADVAPAYM,jdbcType=VARCHAR},
+      BIZTAX = #{BIZTAX,jdbcType=VARCHAR},
+      PAYAINCR = #{PAYAINCR,jdbcType=VARCHAR},
+      EequityTurnovertrend = #{eequityTurnovertrend,jdbcType=VARCHAR},
+      OTHERRECE = #{OTHERRECE,jdbcType=VARCHAR},
+      TOTALNONCLIAB = #{TOTALNONCLIAB,jdbcType=VARCHAR},
+      TOTALNONCASSETS = #{TOTALNONCASSETS,jdbcType=VARCHAR},
+      bbd_qyxx_id = #{bbdQyxxId,jdbcType=VARCHAR}
+    where company_name = #{公司名称,jdbcType=VARCHAR}
+  </update>
+</mapper>

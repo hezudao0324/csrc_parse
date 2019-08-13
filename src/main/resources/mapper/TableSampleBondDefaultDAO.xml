@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbd.csrc.dataparse.dao.TableSampleBondDefaultDAO">
+    <resultMap id="BaseResultMap" type="com.bbd.csrc.dataparse.domain.TableSampleBondDefault">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="company_name" jdbcType="VARCHAR" property="公司名称"/>
+        <result column="score" jdbcType="VARCHAR" property="分数"/>
+        <result column="AVAIDISTSHAREPROF" jdbcType="VARCHAR" property="AVAIDISTSHAREPROF"/>
+        <result column="AVAIDISTPROF" jdbcType="VARCHAR" property="AVAIDISTPROF"/>
+        <result column="Companycashflow" jdbcType="VARCHAR" property="companycashflow"/>
+        <result column="UNDIPROF" jdbcType="VARCHAR" property="UNDIPROF"/>
+        <result column="FreeCashflowtocompany" jdbcType="VARCHAR" property="freeCashflowtocompany"/>
+        <result column="TOTALNONCLIAB" jdbcType="VARCHAR" property="TOTALNONCLIAB"/>
+        <result column="WorkingCapital" jdbcType="VARCHAR" property="workingCapital"/>
+        <result column="FinancialExpenseRate" jdbcType="VARCHAR" property="financialExpenseRate"/>
+        <result column="FINEXPE" jdbcType="VARCHAR" property="FINEXPE"/>
+        <result column="PREPtoLABOPAYC" jdbcType="VARCHAR" property="PREPtoLABOPAYC"/>
+        <result column="TOTALSHARE" jdbcType="VARCHAR" property="TOTALSHARE"/>
+        <result column="FINNETCFLOW" jdbcType="VARCHAR" property="FINNETCFLOW"/>
+        <result column="FINNETCFLOW1" jdbcType="VARCHAR" property="FINNETCFLOW1"/>
+        <result column="COMPINCOAMT" jdbcType="VARCHAR" property="COMPINCOAMT"/>
+        <result column="CashReinvestmentRatio" jdbcType="VARCHAR" property="cashReinvestmentRatio"/>
+        <result column="NoncurrentAssetTurnover" jdbcType="VARCHAR" property="noncurrentAssetTurnover"/>
+        <result column="PARENETP" jdbcType="VARCHAR" property="PARENETP"/>
+        <result column="NPCUT" jdbcType="VARCHAR" property="NPCUT"/>
+        <result column="NETPROFIT" jdbcType="VARCHAR" property="NETPROFIT"/>
+        <result column="CURFDS" jdbcType="VARCHAR" property="CURFDS"/>
+        <result column="bbd_qyxx_id" jdbcType="VARCHAR" property="bbdQyxxId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, company_name, score, AVAIDISTSHAREPROF, AVAIDISTPROF, Companycashflow, UNDIPROF, 
+    FreeCashflowtocompany, TOTALNONCLIAB, WorkingCapital, FinancialExpenseRate, FINEXPE, 
+    PREPtoLABOPAYC, TOTALSHARE, FINNETCFLOW, FINNETCFLOW1, COMPINCOAMT, CashReinvestmentRatio, 
+    NoncurrentAssetTurnover, PARENETP, NPCUT, NETPROFIT, CURFDS, bbd_qyxx_id
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from table_sample_bond_default
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="queryByCompanyName" resultType="com.bbd.csrc.dataparse.domain.TableSampleBondDefault">
+        select
+        <include refid="Base_Column_List"/>
+        from table_sample_bond_default
+        where company_name = #{companyName,jdbcType=VARCHAR}
+    </select>
+    <select id="truncateTable">
+        truncate table table_sample_bond_default
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from table_sample_bond_default
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insertBatch" parameterType="list">
+        insert into table_sample_bond_default (company_name, score, AVAIDISTSHAREPROF,
+        AVAIDISTPROF, Companycashflow, UNDIPROF,
+        FreeCashflowtocompany, TOTALNONCLIAB, WorkingCapital,
+        FinancialExpenseRate, FINEXPE, PREPtoLABOPAYC,
+        TOTALSHARE, FINNETCFLOW, FINNETCFLOW1,
+        COMPINCOAMT, CashReinvestmentRatio, NoncurrentAssetTurnover,
+        PARENETP, NPCUT, NETPROFIT,
+        CURFDS, bbd_qyxx_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.公司名称,jdbcType=VARCHAR}, #{item.分数,jdbcType=VARCHAR}, #{item.AVAIDISTSHAREPROF,jdbcType=VARCHAR},
+            #{item.AVAIDISTPROF,jdbcType=VARCHAR}, #{item.companycashflow,jdbcType=VARCHAR},
+            #{item.UNDIPROF,jdbcType=VARCHAR},
+            #{item.freeCashflowtocompany,jdbcType=VARCHAR}, #{item.TOTALNONCLIAB,jdbcType=VARCHAR},
+            #{item.workingCapital,jdbcType=VARCHAR},
+            #{item.financialExpenseRate,jdbcType=VARCHAR}, #{item.FINEXPE,jdbcType=VARCHAR},
+            #{item.PREPtoLABOPAYC,jdbcType=VARCHAR},
+            #{item.TOTALSHARE,jdbcType=VARCHAR}, #{item.FINNETCFLOW,jdbcType=VARCHAR},
+            #{item.FINNETCFLOW1,jdbcType=VARCHAR},
+            #{item.COMPINCOAMT,jdbcType=VARCHAR}, #{item.cashReinvestmentRatio,jdbcType=VARCHAR},
+            #{item.noncurrentAssetTurnover,jdbcType=VARCHAR},
+            #{item.PARENETP,jdbcType=VARCHAR}, #{item.NPCUT,jdbcType=VARCHAR}, #{item.NETPROFIT,jdbcType=VARCHAR},
+            #{item.CURFDS,jdbcType=VARCHAR}, #{item.bbdQyxxId,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.TableSampleBondDefault" useGeneratedKeys="true">
+    insert into table_sample_bond_default (company_name, score, AVAIDISTSHAREPROF, 
+      AVAIDISTPROF, Companycashflow, UNDIPROF, 
+      FreeCashflowtocompany, TOTALNONCLIAB, WorkingCapital, 
+      FinancialExpenseRate, FINEXPE, PREPtoLABOPAYC, 
+      TOTALSHARE, FINNETCFLOW, FINNETCFLOW1, 
+      COMPINCOAMT, CashReinvestmentRatio, NoncurrentAssetTurnover, 
+      PARENETP, NPCUT, NETPROFIT, 
+      CURFDS, bbd_qyxx_id)
+    values (#{公司名称,jdbcType=VARCHAR}, #{分数,jdbcType=VARCHAR}, #{AVAIDISTSHAREPROF,jdbcType=VARCHAR},
+      #{AVAIDISTPROF,jdbcType=VARCHAR}, #{companycashflow,jdbcType=VARCHAR}, #{UNDIPROF,jdbcType=VARCHAR}, 
+      #{freeCashflowtocompany,jdbcType=VARCHAR}, #{TOTALNONCLIAB,jdbcType=VARCHAR}, #{workingCapital,jdbcType=VARCHAR}, 
+      #{financialExpenseRate,jdbcType=VARCHAR}, #{FINEXPE,jdbcType=VARCHAR}, #{PREPtoLABOPAYC,jdbcType=VARCHAR}, 
+      #{TOTALSHARE,jdbcType=VARCHAR}, #{FINNETCFLOW,jdbcType=VARCHAR}, #{FINNETCFLOW1,jdbcType=VARCHAR}, 
+      #{COMPINCOAMT,jdbcType=VARCHAR}, #{cashReinvestmentRatio,jdbcType=VARCHAR}, #{noncurrentAssetTurnover,jdbcType=VARCHAR}, 
+      #{PARENETP,jdbcType=VARCHAR}, #{NPCUT,jdbcType=VARCHAR}, #{NETPROFIT,jdbcType=VARCHAR}, 
+      #{CURFDS,jdbcType=VARCHAR}, #{bbdQyxxId,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.TableSampleBondDefault" useGeneratedKeys="true">
+        insert into table_sample_bond_default
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="AVAIDISTSHAREPROF != null">
+                AVAIDISTSHAREPROF,
+            </if>
+            <if test="AVAIDISTPROF != null">
+                AVAIDISTPROF,
+            </if>
+            <if test="companycashflow != null">
+                Companycashflow,
+            </if>
+            <if test="UNDIPROF != null">
+                UNDIPROF,
+            </if>
+            <if test="freeCashflowtocompany != null">
+                FreeCashflowtocompany,
+            </if>
+            <if test="TOTALNONCLIAB != null">
+                TOTALNONCLIAB,
+            </if>
+            <if test="workingCapital != null">
+                WorkingCapital,
+            </if>
+            <if test="financialExpenseRate != null">
+                FinancialExpenseRate,
+            </if>
+            <if test="FINEXPE != null">
+                FINEXPE,
+            </if>
+            <if test="PREPtoLABOPAYC != null">
+                PREPtoLABOPAYC,
+            </if>
+            <if test="TOTALSHARE != null">
+                TOTALSHARE,
+            </if>
+            <if test="FINNETCFLOW != null">
+                FINNETCFLOW,
+            </if>
+            <if test="FINNETCFLOW1 != null">
+                FINNETCFLOW1,
+            </if>
+            <if test="COMPINCOAMT != null">
+                COMPINCOAMT,
+            </if>
+            <if test="cashReinvestmentRatio != null">
+                CashReinvestmentRatio,
+            </if>
+            <if test="noncurrentAssetTurnover != null">
+                NoncurrentAssetTurnover,
+            </if>
+            <if test="PARENETP != null">
+                PARENETP,
+            </if>
+            <if test="NPCUT != null">
+                NPCUT,
+            </if>
+            <if test="NETPROFIT != null">
+                NETPROFIT,
+            </if>
+            <if test="CURFDS != null">
+                CURFDS,
+            </if>
+            <if test="bbd_qyxx_id != null">
+                bbd_qyxx_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="company_name != null">
+                #{company_name,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=VARCHAR},
+            </if>
+            <if test="AVAIDISTSHAREPROF != null">
+                #{AVAIDISTSHAREPROF,jdbcType=VARCHAR},
+            </if>
+            <if test="AVAIDISTPROF != null">
+                #{AVAIDISTPROF,jdbcType=VARCHAR},
+            </if>
+            <if test="companycashflow != null">
+                #{companycashflow,jdbcType=VARCHAR},
+            </if>
+            <if test="UNDIPROF != null">
+                #{UNDIPROF,jdbcType=VARCHAR},
+            </if>
+            <if test="freeCashflowtocompany != null">
+                #{freeCashflowtocompany,jdbcType=VARCHAR},
+            </if>
+            <if test="TOTALNONCLIAB != null">
+                #{TOTALNONCLIAB,jdbcType=VARCHAR},
+            </if>
+            <if test="workingCapital != null">
+                #{workingCapital,jdbcType=VARCHAR},
+            </if>
+            <if test="financialExpenseRate != null">
+                #{financialExpenseRate,jdbcType=VARCHAR},
+            </if>
+            <if test="FINEXPE != null">
+                #{FINEXPE,jdbcType=VARCHAR},
+            </if>
+            <if test="PREPtoLABOPAYC != null">
+                #{PREPtoLABOPAYC,jdbcType=VARCHAR},
+            </if>
+            <if test="TOTALSHARE != null">
+                #{TOTALSHARE,jdbcType=VARCHAR},
+            </if>
+            <if test="FINNETCFLOW != null">
+                #{FINNETCFLOW,jdbcType=VARCHAR},
+            </if>
+            <if test="FINNETCFLOW1 != null">
+                #{FINNETCFLOW1,jdbcType=VARCHAR},
+            </if>
+            <if test="COMPINCOAMT != null">
+                #{COMPINCOAMT,jdbcType=VARCHAR},
+            </if>
+            <if test="cashReinvestmentRatio != null">
+                #{cashReinvestmentRatio,jdbcType=VARCHAR},
+            </if>
+            <if test="noncurrentAssetTurnover != null">
+                #{noncurrentAssetTurnover,jdbcType=VARCHAR},
+            </if>
+            <if test="PARENETP != null">
+                #{PARENETP,jdbcType=VARCHAR},
+            </if>
+            <if test="NPCUT != null">
+                #{NPCUT,jdbcType=VARCHAR},
+            </if>
+            <if test="NETPROFIT != null">
+                #{NETPROFIT,jdbcType=VARCHAR},
+            </if>
+            <if test="CURFDS != null">
+                #{CURFDS,jdbcType=VARCHAR},
+            </if>
+            <if test="bbd_qyxx_id != null">
+                #{bbd_qyxx_id,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bbd.csrc.dataparse.domain.TableSampleBondDefault">
+        update table_sample_bond_default
+        <set>
+            <if test="company_name != null">
+                company_name = #{company_name,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=VARCHAR},
+            </if>
+            <if test="AVAIDISTSHAREPROF != null">
+                AVAIDISTSHAREPROF = #{AVAIDISTSHAREPROF,jdbcType=VARCHAR},
+            </if>
+            <if test="AVAIDISTPROF != null">
+                AVAIDISTPROF = #{AVAIDISTPROF,jdbcType=VARCHAR},
+            </if>
+            <if test="companycashflow != null">
+                Companycashflow = #{companycashflow,jdbcType=VARCHAR},
+            </if>
+            <if test="UNDIPROF != null">
+                UNDIPROF = #{UNDIPROF,jdbcType=VARCHAR},
+            </if>
+            <if test="freeCashflowtocompany != null">
+                FreeCashflowtocompany = #{freeCashflowtocompany,jdbcType=VARCHAR},
+            </if>
+            <if test="TOTALNONCLIAB != null">
+                TOTALNONCLIAB = #{TOTALNONCLIAB,jdbcType=VARCHAR},
+            </if>
+            <if test="workingCapital != null">
+                WorkingCapital = #{workingCapital,jdbcType=VARCHAR},
+            </if>
+            <if test="financialExpenseRate != null">
+                FinancialExpenseRate = #{financialExpenseRate,jdbcType=VARCHAR},
+            </if>
+            <if test="FINEXPE != null">
+                FINEXPE = #{FINEXPE,jdbcType=VARCHAR},
+            </if>
+            <if test="PREPtoLABOPAYC != null">
+                PREPtoLABOPAYC = #{PREPtoLABOPAYC,jdbcType=VARCHAR},
+            </if>
+            <if test="TOTALSHARE != null">
+                TOTALSHARE = #{TOTALSHARE,jdbcType=VARCHAR},
+            </if>
+            <if test="FINNETCFLOW != null">
+                FINNETCFLOW = #{FINNETCFLOW,jdbcType=VARCHAR},
+            </if>
+            <if test="FINNETCFLOW1 != null">
+                FINNETCFLOW1 = #{FINNETCFLOW1,jdbcType=VARCHAR},
+            </if>
+            <if test="COMPINCOAMT != null">
+                COMPINCOAMT = #{COMPINCOAMT,jdbcType=VARCHAR},
+            </if>
+            <if test="cashReinvestmentRatio != null">
+                CashReinvestmentRatio = #{cashReinvestmentRatio,jdbcType=VARCHAR},
+            </if>
+            <if test="noncurrentAssetTurnover != null">
+                NoncurrentAssetTurnover = #{noncurrentAssetTurnover,jdbcType=VARCHAR},
+            </if>
+            <if test="PARENETP != null">
+                PARENETP = #{PARENETP,jdbcType=VARCHAR},
+            </if>
+            <if test="NPCUT != null">
+                NPCUT = #{NPCUT,jdbcType=VARCHAR},
+            </if>
+            <if test="NETPROFIT != null">
+                NETPROFIT = #{NETPROFIT,jdbcType=VARCHAR},
+            </if>
+            <if test="CURFDS != null">
+                CURFDS = #{CURFDS,jdbcType=VARCHAR},
+            </if>
+            <if test="bbd_qyxx_id != null">
+                bbd_qyxx_id = #{bbd_qyxx_id,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bbd.csrc.dataparse.domain.TableSampleBondDefault">
+    update table_sample_bond_default
+    set company_name = #{company_name,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      AVAIDISTSHAREPROF = #{AVAIDISTSHAREPROF,jdbcType=VARCHAR},
+      AVAIDISTPROF = #{AVAIDISTPROF,jdbcType=VARCHAR},
+      Companycashflow = #{companycashflow,jdbcType=VARCHAR},
+      UNDIPROF = #{UNDIPROF,jdbcType=VARCHAR},
+      FreeCashflowtocompany = #{freeCashflowtocompany,jdbcType=VARCHAR},
+      TOTALNONCLIAB = #{TOTALNONCLIAB,jdbcType=VARCHAR},
+      WorkingCapital = #{workingCapital,jdbcType=VARCHAR},
+      FinancialExpenseRate = #{financialExpenseRate,jdbcType=VARCHAR},
+      FINEXPE = #{FINEXPE,jdbcType=VARCHAR},
+      PREPtoLABOPAYC = #{PREPtoLABOPAYC,jdbcType=VARCHAR},
+      TOTALSHARE = #{TOTALSHARE,jdbcType=VARCHAR},
+      FINNETCFLOW = #{FINNETCFLOW,jdbcType=VARCHAR},
+      FINNETCFLOW1 = #{FINNETCFLOW1,jdbcType=VARCHAR},
+      COMPINCOAMT = #{COMPINCOAMT,jdbcType=VARCHAR},
+      CashReinvestmentRatio = #{cashReinvestmentRatio,jdbcType=VARCHAR},
+      NoncurrentAssetTurnover = #{noncurrentAssetTurnover,jdbcType=VARCHAR},
+      PARENETP = #{PARENETP,jdbcType=VARCHAR},
+      NPCUT = #{NPCUT,jdbcType=VARCHAR},
+      NETPROFIT = #{NETPROFIT,jdbcType=VARCHAR},
+      CURFDS = #{CURFDS,jdbcType=VARCHAR},
+      bbd_qyxx_id = #{bbd_qyxx_id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByCompanyName">
+        update table_sample_bond_default
+        set
+          score = #{分数,jdbcType=VARCHAR},
+          AVAIDISTSHAREPROF = #{AVAIDISTSHAREPROF,jdbcType=VARCHAR},
+          AVAIDISTPROF = #{AVAIDISTPROF,jdbcType=VARCHAR},
+          Companycashflow = #{companycashflow,jdbcType=VARCHAR},
+          UNDIPROF = #{UNDIPROF,jdbcType=VARCHAR},
+          FreeCashflowtocompany = #{freeCashflowtocompany,jdbcType=VARCHAR},
+          TOTALNONCLIAB = #{TOTALNONCLIAB,jdbcType=VARCHAR},
+          WorkingCapital = #{workingCapital,jdbcType=VARCHAR},
+          FinancialExpenseRate = #{financialExpenseRate,jdbcType=VARCHAR},
+          FINEXPE = #{FINEXPE,jdbcType=VARCHAR},
+          PREPtoLABOPAYC = #{PREPtoLABOPAYC,jdbcType=VARCHAR},
+          TOTALSHARE = #{TOTALSHARE,jdbcType=VARCHAR},
+          FINNETCFLOW = #{FINNETCFLOW,jdbcType=VARCHAR},
+          FINNETCFLOW1 = #{FINNETCFLOW1,jdbcType=VARCHAR},
+          COMPINCOAMT = #{COMPINCOAMT,jdbcType=VARCHAR},
+          CashReinvestmentRatio = #{cashReinvestmentRatio,jdbcType=VARCHAR},
+          NoncurrentAssetTurnover = #{noncurrentAssetTurnover,jdbcType=VARCHAR},
+          PARENETP = #{PARENETP,jdbcType=VARCHAR},
+          NPCUT = #{NPCUT,jdbcType=VARCHAR},
+          NETPROFIT = #{NETPROFIT,jdbcType=VARCHAR},
+          CURFDS = #{CURFDS,jdbcType=VARCHAR},
+          bbd_qyxx_id = #{bbdQyxxId,jdbcType=VARCHAR}
+        where company_name = #{公司名称,jdbcType=VARCHAR}
+    </update>
+</mapper>

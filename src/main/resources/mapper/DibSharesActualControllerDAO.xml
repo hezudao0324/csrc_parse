@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbd.csrc.dataparse.dao.DibSharesActualControllerDAO">
+    <resultMap id="BaseResultMap" type="com.bbd.csrc.dataparse.domain.DibSharesActualController">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sec_code" jdbcType="VARCHAR" property="secCode"/>
+        <result column="actual_contr_name" jdbcType="VARCHAR" property="actualContrName"/>
+        <result column="citize_country" jdbcType="VARCHAR" property="citizeCountry"/>
+        <result column="report_date" jdbcType="VARCHAR" property="reportDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, sec_code, actual_contr_name, citize_country, report_date
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dib_shares_actual_controller
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectBySecCode" resultType="com.bbd.csrc.dataparse.domain.DibSharesActualController">
+        select
+        <include refid="Base_Column_List"/>
+        from dib_shares_actual_controller
+        <where>
+            <if test="reportDate != null">
+                and date_format(report_date,'%Y-%m-%d') = #{reportDate}
+            </if>
+            <if test="secCode != null">
+                and sec_code = #{secCode}
+            </if>
+        </where>
+    </select>
+    <select id="selectSecCodeGroupBySecCode" resultType="java.lang.String">
+      select sec_code from dib_shares_actual_controller
+      where date_format(report_date,'%Y-%m-%d') = #{reportDate}
+      GROUP BY sec_code
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dib_shares_actual_controller
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.DibSharesActualController" useGeneratedKeys="true">
+    insert into dib_shares_actual_controller (sec_code, actual_contr_name, citize_country, 
+      report_date)
+    values (#{secCode,jdbcType=VARCHAR}, #{actualContrName,jdbcType=VARCHAR}, #{citizeCountry,jdbcType=VARCHAR}, 
+      #{reportDate,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.DibSharesActualController" useGeneratedKeys="true">
+        insert into dib_shares_actual_controller
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="secCode != null">
+                sec_code,
+            </if>
+            <if test="actualContrName != null">
+                actual_contr_name,
+            </if>
+            <if test="citizeCountry != null">
+                citize_country,
+            </if>
+            <if test="reportDate != null">
+                report_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="secCode != null">
+                #{secCode,jdbcType=VARCHAR},
+            </if>
+            <if test="actualContrName != null">
+                #{actualContrName,jdbcType=VARCHAR},
+            </if>
+            <if test="citizeCountry != null">
+                #{citizeCountry,jdbcType=VARCHAR},
+            </if>
+            <if test="reportDate != null">
+                #{reportDate,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bbd.csrc.dataparse.domain.DibSharesActualController">
+        update dib_shares_actual_controller
+        <set>
+            <if test="secCode != null">
+                sec_code = #{secCode,jdbcType=VARCHAR},
+            </if>
+            <if test="actualContrName != null">
+                actual_contr_name = #{actualContrName,jdbcType=VARCHAR},
+            </if>
+            <if test="citizeCountry != null">
+                citize_country = #{citizeCountry,jdbcType=VARCHAR},
+            </if>
+            <if test="reportDate != null">
+                report_date = #{reportDate,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bbd.csrc.dataparse.domain.DibSharesActualController">
+    update dib_shares_actual_controller
+    set sec_code = #{secCode,jdbcType=VARCHAR},
+      actual_contr_name = #{actualContrName,jdbcType=VARCHAR},
+      citize_country = #{citizeCountry,jdbcType=VARCHAR},
+      report_date = #{reportDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

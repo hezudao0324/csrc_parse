@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbd.csrc.dataparse.dao.AnalyIndexConfigDataDAO">
+    <resultMap id="BaseResultMap" type="com.bbd.csrc.dataparse.domain.AnalyIndexConfigData">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="one" jdbcType="INTEGER" property="one"/>
+        <result column="two" jdbcType="INTEGER" property="two"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="parent_type" jdbcType="INTEGER" property="parentType"/>
+        <result column="comment" jdbcType="VARCHAR" property="comment"/>
+        <result column="score" jdbcType="VARCHAR" property="score"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, `name`, one, two, `type`, parent_type, `comment`, score
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from analy_index_config_data
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="queryByComment" resultType="com.bbd.csrc.dataparse.domain.AnalyIndexConfigData">
+        select
+        <include refid="Base_Column_List"/>
+        from analy_index_config_data
+        where comment = #{commnet,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from analy_index_config_data
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.AnalyIndexConfigData" useGeneratedKeys="true">
+    insert into analy_index_config_data (`name`, one, two, 
+      `type`, parent_type, `comment`, 
+      score)
+    values (#{name,jdbcType=VARCHAR}, #{one,jdbcType=INTEGER}, #{two,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{parentType,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, 
+      #{score,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.bbd.csrc.dataparse.domain.AnalyIndexConfigData" useGeneratedKeys="true">
+        insert into analy_index_config_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="one != null">
+                one,
+            </if>
+            <if test="two != null">
+                two,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="parentType != null">
+                parent_type,
+            </if>
+            <if test="comment != null">
+                `comment`,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="one != null">
+                #{one,jdbcType=INTEGER},
+            </if>
+            <if test="two != null">
+                #{two,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="parentType != null">
+                #{parentType,jdbcType=INTEGER},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bbd.csrc.dataparse.domain.AnalyIndexConfigData">
+        update analy_index_config_data
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="one != null">
+                one = #{one,jdbcType=INTEGER},
+            </if>
+            <if test="two != null">
+                two = #{two,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="parentType != null">
+                parent_type = #{parentType,jdbcType=INTEGER},
+            </if>
+            <if test="comment != null">
+                `comment` = #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bbd.csrc.dataparse.domain.AnalyIndexConfigData">
+    update analy_index_config_data
+    set `name` = #{name,jdbcType=VARCHAR},
+      one = #{one,jdbcType=INTEGER},
+      two = #{two,jdbcType=INTEGER},
+      `type` = #{type,jdbcType=INTEGER},
+      parent_type = #{parentType,jdbcType=INTEGER},
+      `comment` = #{comment,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateScore">
+    update analy_index_config_data set score = #{score}
+    where one = #{one} and `parent_type` = #{parentType} and `name` = #{name}
+  </update>
+</mapper>

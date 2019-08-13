@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbd.csrc.dataparse.dao.KtggDAO">
+  <resultMap id="BaseResultMap" type="com.bbd.csrc.dataparse.domain.Ktgg">
+    <result column="bbd_qyxx_id" jdbcType="VARCHAR" property="bbd_qyxx_id" />
+    <result column="company_name" jdbcType="VARCHAR" property="company_name" />
+    <result column="credit_code" jdbcType="VARCHAR" property="credit_code" />
+    <result column="jgdm" jdbcType="VARCHAR" property="jgdm" />
+    <result column="regnum" jdbcType="VARCHAR" property="regnum" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="action_cause" jdbcType="VARCHAR" property="action_cause" />
+    <result column="bbd_dotime" jdbcType="VARCHAR" property="bbd_dotime" />
+    <result column="bbd_uptime" jdbcType="VARCHAR" property="bbd_uptime" />
+    <result column="trial_date" jdbcType="VARCHAR" property="trial_date" />
+    <result column="case_code" jdbcType="VARCHAR" property="case_code" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="litigant" jdbcType="VARCHAR" property="litigant" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="bbd_xgxx_id" jdbcType="VARCHAR" property="bbd_xgxx_id" />
+    <result column="bbd_type" jdbcType="VARCHAR" property="bbd_type" />
+    <result column="create_time" jdbcType="VARCHAR" property="create_time" />
+    <result column="bbd_url" jdbcType="VARCHAR" property="bbd_url" />
+    <result column="bbd_source" jdbcType="VARCHAR" property="bbd_source" />
+    <result column="original_trial_court" jdbcType="VARCHAR" property="original_trial_court" />
+    <result column="closure_date" jdbcType="VARCHAR" property="closure_date" />
+    <result column="court" jdbcType="VARCHAR" property="court" />
+    <result column="accuser" jdbcType="VARCHAR" property="accuser" />
+    <result column="pubdate" jdbcType="VARCHAR" property="pubdate" />
+    <result column="clerk" jdbcType="VARCHAR" property="clerk" />
+    <result column="trial_judge" jdbcType="VARCHAR" property="trial_judge" />
+    <result column="case_type" jdbcType="VARCHAR" property="case_type" />
+    <result column="register_date" jdbcType="VARCHAR" property="register_date" />
+    <result column="chief_judge" jdbcType="VARCHAR" property="chief_judge" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="case_state" jdbcType="VARCHAR" property="case_state" />
+    <result column="agent_phone" jdbcType="VARCHAR" property="agent_phone" />
+    <result column="is_revoke" jdbcType="VARCHAR" property="is_revoke" />
+    <result column="original_trial_date" jdbcType="VARCHAR" property="original_trial_date" />
+    <result column="court_behoof" jdbcType="VARCHAR" property="court_behoof" />
+    <result column="org_depart" jdbcType="VARCHAR" property="org_depart" />
+    <result column="defendant" jdbcType="VARCHAR" property="defendant" />
+    <result column="trial_court" jdbcType="VARCHAR" property="trial_court" />
+    <result column="id_type" jdbcType="VARCHAR" property="id_type" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="collegial_member" jdbcType="VARCHAR" property="collegial_member" />
+    <result column="action_name" jdbcType="VARCHAR" property="action_name" />
+    <result column="org_agent" jdbcType="VARCHAR" property="org_agent" />
+    <result column="bbd_version" jdbcType="VARCHAR" property="bbd_version" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bbd.csrc.dataparse.domain.Ktgg">
+    <result column="main" jdbcType="LONGVARCHAR" property="main" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+    main
+  </sql>
+  <insert id="insert" parameterType="com.bbd.csrc.dataparse.domain.Ktgg">
+    insert into ktgg (bbd_qyxx_id, company_name, credit_code, 
+      jgdm, regnum, id, action_cause, 
+      bbd_dotime, bbd_uptime, trial_date, 
+      case_code, city, litigant, 
+      title, bbd_xgxx_id, bbd_type, 
+      create_time, bbd_url, bbd_source, 
+      original_trial_court, closure_date, court, 
+      accuser, pubdate, clerk, 
+      trial_judge, case_type, register_date, 
+      chief_judge, flag, case_state, 
+      agent_phone, is_revoke, original_trial_date, 
+      court_behoof, org_depart, defendant, 
+      trial_court, id_type, province, 
+      collegial_member, action_name, org_agent, 
+      bbd_version, main)
+    values (#{bbd_qyxx_id,jdbcType=VARCHAR}, #{company_name,jdbcType=VARCHAR}, #{credit_code,jdbcType=VARCHAR}, 
+      #{jgdm,jdbcType=VARCHAR}, #{regnum,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{action_cause,jdbcType=VARCHAR}, 
+      #{bbd_dotime,jdbcType=VARCHAR}, #{bbd_uptime,jdbcType=VARCHAR}, #{trial_date,jdbcType=VARCHAR}, 
+      #{case_code,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{litigant,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{bbd_xgxx_id,jdbcType=VARCHAR}, #{bbd_type,jdbcType=VARCHAR}, 
+      #{create_time,jdbcType=VARCHAR}, #{bbd_url,jdbcType=VARCHAR}, #{bbd_source,jdbcType=VARCHAR}, 
+      #{original_trial_court,jdbcType=VARCHAR}, #{closure_date,jdbcType=VARCHAR}, #{court,jdbcType=VARCHAR}, 
+      #{accuser,jdbcType=VARCHAR}, #{pubdate,jdbcType=VARCHAR}, #{clerk,jdbcType=VARCHAR}, 
+      #{trial_judge,jdbcType=VARCHAR}, #{case_type,jdbcType=VARCHAR}, #{register_date,jdbcType=VARCHAR}, 
+      #{chief_judge,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, #{case_state,jdbcType=VARCHAR}, 
+      #{agent_phone,jdbcType=VARCHAR}, #{is_revoke,jdbcType=VARCHAR}, #{original_trial_date,jdbcType=VARCHAR}, 
+      #{court_behoof,jdbcType=VARCHAR}, #{org_depart,jdbcType=VARCHAR}, #{defendant,jdbcType=VARCHAR}, 
+      #{trial_court,jdbcType=VARCHAR}, #{id_type,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{collegial_member,jdbcType=VARCHAR}, #{action_name,jdbcType=VARCHAR}, #{org_agent,jdbcType=VARCHAR}, 
+      #{bbd_version,jdbcType=VARCHAR}, #{main,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bbd.csrc.dataparse.domain.Ktgg">
+    insert into ktgg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bbd_qyxx_id != null">
+        bbd_qyxx_id,
+      </if>
+      <if test="company_name != null">
+        company_name,
+      </if>
+      <if test="credit_code != null">
+        credit_code,
+      </if>
+      <if test="jgdm != null">
+        jgdm,
+      </if>
+      <if test="regnum != null">
+        regnum,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="action_cause != null">
+        action_cause,
+      </if>
+      <if test="bbd_dotime != null">
+        bbd_dotime,
+      </if>
+      <if test="bbd_uptime != null">
+        bbd_uptime,
+      </if>
+      <if test="trial_date != null">
+        trial_date,
+      </if>
+      <if test="case_code != null">
+        case_code,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="litigant != null">
+        litigant,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="bbd_xgxx_id != null">
+        bbd_xgxx_id,
+      </if>
+      <if test="bbd_type != null">
+        bbd_type,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="bbd_url != null">
+        bbd_url,
+      </if>
+      <if test="bbd_source != null">
+        bbd_source,
+      </if>
+      <if test="original_trial_court != null">
+        original_trial_court,
+      </if>
+      <if test="closure_date != null">
+        closure_date,
+      </if>
+      <if test="court != null">
+        court,
+      </if>
+      <if test="accuser != null">
+        accuser,
+      </if>
+      <if test="pubdate != null">
+        pubdate,
+      </if>
+      <if test="clerk != null">
+        clerk,
+      </if>
+      <if test="trial_judge != null">
+        trial_judge,
+      </if>
+      <if test="case_type != null">
+        case_type,
+      </if>
+      <if test="register_date != null">
+        register_date,
+      </if>
+      <if test="chief_judge != null">
+        chief_judge,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="case_state != null">
+        case_state,
+      </if>
+      <if test="agent_phone != null">
+        agent_phone,
+      </if>
+      <if test="is_revoke != null">
+        is_revoke,
+      </if>
+      <if test="original_trial_date != null">
+        original_trial_date,
+      </if>
+      <if test="court_behoof != null">
+        court_behoof,
+      </if>
+      <if test="org_depart != null">
+        org_depart,
+      </if>
+      <if test="defendant != null">
+        defendant,
+      </if>
+      <if test="trial_court != null">
+        trial_court,
+      </if>
+      <if test="id_type != null">
+        id_type,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="collegial_member != null">
+        collegial_member,
+      </if>
+      <if test="action_name != null">
+        action_name,
+      </if>
+      <if test="org_agent != null">
+        org_agent,
+      </if>
+      <if test="bbd_version != null">
+        bbd_version,
+      </if>
+      <if test="main != null">
+        main,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bbd_qyxx_id != null">
+        #{bbd_qyxx_id,jdbcType=VARCHAR},
+      </if>
+      <if test="company_name != null">
+        #{company_name,jdbcType=VARCHAR},
+      </if>
+      <if test="credit_code != null">
+        #{credit_code,jdbcType=VARCHAR},
+      </if>
+      <if test="jgdm != null">
+        #{jgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="regnum != null">
+        #{regnum,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="action_cause != null">
+        #{action_cause,jdbcType=VARCHAR},
+      </if>
+      <if test="bbd_dotime != null">
+        #{bbd_dotime,jdbcType=VARCHAR},
+      </if>
+      <if test="bbd_uptime != null">
+        #{bbd_uptime,jdbcType=VARCHAR},
+      </if>
+      <if test="trial_date != null">
+        #{trial_date,jdbcType=VARCHAR},
+      </if>
+      <if test="case_code != null">
+        #{case_code,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="litigant != null">
+        #{litigant,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="bbd_xgxx_id != null">
+        #{bbd_xgxx_id,jdbcType=VARCHAR},
+      </if>
+      <if test="bbd_type != null">
+        #{bbd_type,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=VARCHAR},
+      </if>
+      <if test="bbd_url != null">
+        #{bbd_url,jdbcType=VARCHAR},
+      </if>
+      <if test="bbd_source != null">
+        #{bbd_source,jdbcType=VARCHAR},
+      </if>
+      <if test="original_trial_court != null">
+        #{original_trial_court,jdbcType=VARCHAR},
+      </if>
+      <if test="closure_date != null">
+        #{closure_date,jdbcType=VARCHAR},
+      </if>
+      <if test="court != null">
+        #{court,jdbcType=VARCHAR},
+      </if>
+      <if test="accuser != null">
+        #{accuser,jdbcType=VARCHAR},
+      </if>
+      <if test="pubdate != null">
+        #{pubdate,jdbcType=VARCHAR},
+      </if>
+      <if test="clerk != null">
+        #{clerk,jdbcType=VARCHAR},
+      </if>
+      <if test="trial_judge != null">
+        #{trial_judge,jdbcType=VARCHAR},
+      </if>
+      <if test="case_type != null">
+        #{case_type,jdbcType=VARCHAR},
+      </if>
+      <if test="register_date != null">
+        #{register_date,jdbcType=VARCHAR},
+      </if>
+      <if test="chief_judge != null">
+        #{chief_judge,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="case_state != null">
+        #{case_state,jdbcType=VARCHAR},
+      </if>
+      <if test="agent_phone != null">
+        #{agent_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="is_revoke != null">
+        #{is_revoke,jdbcType=VARCHAR},
+      </if>
+      <if test="original_trial_date != null">
+        #{original_trial_date,jdbcType=VARCHAR},
+      </if>
+      <if test="court_behoof != null">
+        #{court_behoof,jdbcType=VARCHAR},
+      </if>
+      <if test="org_depart != null">
+        #{org_depart,jdbcType=VARCHAR},
+      </if>
+      <if test="defendant != null">
+        #{defendant,jdbcType=VARCHAR},
+      </if>
+      <if test="trial_court != null">
+        #{trial_court,jdbcType=VARCHAR},
+      </if>
+      <if test="id_type != null">
+        #{id_type,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="collegial_member != null">
+        #{collegial_member,jdbcType=VARCHAR},
+      </if>
+      <if test="action_name != null">
+        #{action_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_agent != null">
+        #{org_agent,jdbcType=VARCHAR},
+      </if>
+      <if test="bbd_version != null">
+        #{bbd_version,jdbcType=VARCHAR},
+      </if>
+      <if test="main != null">
+        #{main,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbd.csrc.dataparse.dao.PersonSkrDAO">
+  <resultMap id="BaseResultMap" type="com.bbd.csrc.dataparse.domain.PersonSkr">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sec_code" jdbcType="VARCHAR" property="sec_code" />
+    <result column="actual_contr_name" jdbcType="VARCHAR" property="actual_contr_name" />
+    <result column="citize_country" jdbcType="VARCHAR" property="citize_country" />
+    <result column="report_date" jdbcType="VARCHAR" property="report_date" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sec_code, actual_contr_name, citize_country, report_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from person_skr
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from person_skr
+    </select>
+  <select id="selectByYear" resultMap="BaseResultMap">
+    select
+    id, sec_code, actual_contr_name, citize_country, DATE_FORMAT(report_date,'%Y') report_date
+    from person_skr
+    where DATE_FORMAT(report_date,'%Y') = #{year}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from person_skr
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bbd.csrc.dataparse.domain.PersonSkr" useGeneratedKeys="true">
+    insert into person_skr (sec_code, actual_contr_name, citize_country, 
+      report_date)
+    values (#{sec_code,jdbcType=VARCHAR}, #{actual_contr_name,jdbcType=VARCHAR}, #{citize_country,jdbcType=VARCHAR}, 
+      #{report_date,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bbd.csrc.dataparse.domain.PersonSkr" useGeneratedKeys="true">
+    insert into person_skr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sec_code != null">
+        sec_code,
+      </if>
+      <if test="actual_contr_name != null">
+        actual_contr_name,
+      </if>
+      <if test="citize_country != null">
+        citize_country,
+      </if>
+      <if test="report_date != null">
+        report_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sec_code != null">
+        #{sec_code,jdbcType=VARCHAR},
+      </if>
+      <if test="actual_contr_name != null">
+        #{actual_contr_name,jdbcType=VARCHAR},
+      </if>
+      <if test="citize_country != null">
+        #{citize_country,jdbcType=VARCHAR},
+      </if>
+      <if test="report_date != null">
+        #{report_date,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bbd.csrc.dataparse.domain.PersonSkr">
+    update person_skr
+    <set>
+      <if test="sec_code != null">
+        sec_code = #{sec_code,jdbcType=VARCHAR},
+      </if>
+      <if test="actual_contr_name != null">
+        actual_contr_name = #{actual_contr_name,jdbcType=VARCHAR},
+      </if>
+      <if test="citize_country != null">
+        citize_country = #{citize_country,jdbcType=VARCHAR},
+      </if>
+      <if test="report_date != null">
+        report_date = #{report_date,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bbd.csrc.dataparse.domain.PersonSkr">
+    update person_skr
+    set sec_code = #{sec_code,jdbcType=VARCHAR},
+      actual_contr_name = #{actual_contr_name,jdbcType=VARCHAR},
+      citize_country = #{citize_country,jdbcType=VARCHAR},
+      report_date = #{report_date,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
